@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monster Battler - Design Questionnaire</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #212529;
+      background: #F8F9FA;
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #212529;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #6C757D;
+      font-style: italic;
+    }
+
+    .intro {
+      background: white;
+      border: 1px solid #E9ECEF;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 32px;
+      color: #495057;
+    }
+
+    section {
+      background: white;
+      border: 1px solid #E9ECEF;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0D9488;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #0D948820;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      font-size: 15px;
+      color: #343A40;
+      margin-bottom: 8px;
+    }
+
+    .hint {
+      font-size: 14px;
+      color: #6C757D;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #DEE2E6;
+      border-radius: 6px;
+      font-size: 16px;
+      background: white;
+      color: #212529;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236C757D' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+
+    select:focus {
+      border-color: #0D9488;
+      outline: none;
+      box-shadow: 0 0 0 3px #0D948820;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #DEE2E6;
+      border-radius: 6px;
+      font-size: 16px;
+      font-family: inherit;
+      background: white;
+      color: #212529;
+      transition: border-color 0.2s ease;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: #0D9488;
+      outline: none;
+      box-shadow: 0 0 0 3px #0D948820;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: #0D9488;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .checkbox-item span {
+      font-size: 15px;
+      color: #495057;
+    }
+
+    .checkbox-item:hover span {
+      color: #212529;
+    }
+
+    .actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #0D9488;
+      color: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background: #E9ECEF;
+      color: #495057;
+    }
+
+    .btn-secondary:hover {
+      background: #DEE2E6;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 24px; }
+      section { padding: 20px; }
+      .actions { flex-direction: column; }
+      button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Monster Battler Game</h1>
+      <p class="subtitle">Digimon World meets Link to the Past</p>
+    </header>
+
+    <div class="intro">
+      <p>Design questionnaire for your monster battler concept: raise monsters, breed/combine them, fight in arenas and wilderness, monsters grow smarter through battle, player gives orders but can't directly control combat. RPG Maker with LTTP-style graphics.</p>
+    </div>
+
+    <form id="designForm">
+
+      <!-- MONSTERS -->
+      <section>
+        <h2>Monsters - Core Design</h2>
+
+        <div class="form-group">
+          <label for="partySize">How many monsters does the player have at once?</label>
+          <select id="partySize" name="partySize">
+            <option value="">Select an option...</option>
+            <option value="one">One partner (Digimon World style)</option>
+            <option value="small">Small party (3-4)</option>
+            <option value="medium">Medium party (5-6)</option>
+            <option value="large">Large roster, deploy a few</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>How are monsters acquired?</label>
+          <p class="hint">Select all that apply</p>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="acquisition" value="eggs">
+              <span>Find eggs in the wild</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="acquisition" value="capture">
+              <span>Capture/tame weakened enemies</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="acquisition" value="starter">
+              <span>Start with one, breed more</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="acquisition" value="gift">
+              <span>Receive from NPCs/quests</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="acquisition" value="buy">
+              <span>Purchase from shops/breeders</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>What makes each monster unique?</label>
+          <p class="hint">Select all that apply</p>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="uniqueness" value="species">
+              <span>Species/type determines base traits</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="uniqueness" value="stats">
+              <span>Individual stats vary per monster</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="uniqueness" value="personality">
+              <span>Personality traits affect behavior</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="uniqueness" value="learned">
+              <span>Learned behaviors from battles</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="uniqueness" value="elements">
+              <span>Elemental types/affinities</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lifespan">Do monsters have lifespans/death?</label>
+          <select id="lifespan" name="lifespan">
+            <option value="">Select an option...</option>
+            <option value="immortal">Immortal partners</option>
+            <option value="reincarnate">Die and reincarnate (Digimon World style)</option>
+            <option value="permadeath">Permanent death possible</option>
+            <option value="retire">Retire but don't die</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="monstersOther">Other thoughts on monsters?</label>
+          <textarea id="monstersOther" name="monstersOther" placeholder="Any ideas about monster design..."></textarea>
+        </div>
+      </section>
+
+      <!-- BREEDING -->
+      <section>
+        <h2>Breeding & Combining</h2>
+
+        <div class="form-group">
+          <label for="breedingMechanic">What's the breeding mechanic?</label>
+          <select id="breedingMechanic" name="breedingMechanic">
+            <option value="">Select an option...</option>
+            <option value="egg">Two monsters produce an egg</option>
+            <option value="fusion">Fusion into one new creature</option>
+            <option value="both">Both options available</option>
+            <option value="none">No breeding, just catching/finding</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>What carries over to offspring?</label>
+          <p class="hint">Select all that apply</p>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="inheritance" value="stats">
+              <span>Base stats</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="inheritance" value="moves">
+              <span>Moves/abilities</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="inheritance" value="visual">
+              <span>Visual traits/colors</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="inheritance" value="personality">
+              <span>Personality</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="inheritance" value="species">
+              <span>New species combinations</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="evolution">Are there evolution tiers?</label>
+          <select id="evolution" name="evolution">
+            <option value="">Select an option...</option>
+            <option value="none">No - flat progression</option>
+            <option value="linear">Linear evolution chain</option>
+            <option value="branching">Branching evolutions (choices)</option>
+            <option value="digimon">Multi-tier (rookie → champion → ultimate)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="breedingDifficulty">How rare/difficult is breeding?</label>
+          <select id="breedingDifficulty" name="breedingDifficulty">
+            <option value="">Select an option...</option>
+            <option value="easy">Easy and frequent</option>
+            <option value="moderate">Moderate - takes some effort</option>
+            <option value="milestone">Big milestone moment</option>
+            <option value="endgame">Endgame/postgame feature</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="breedingOther">Other thoughts on breeding?</label>
+          <textarea id="breedingOther" name="breedingOther" placeholder="Any ideas about breeding/combining..."></textarea>
+        </div>
+      </section>
+
+      <!-- COMBAT -->
+      <section>
+        <h2>Combat - The Heart of It</h2>
+
+        <div class="form-group">
+          <label for="aiAutonomy">How autonomous are monsters in battle?</label>
+          <select id="aiAutonomy" name="aiAutonomy">
+            <option value="">Select an option...</option>
+            <option value="full">Fully autonomous with tendencies</option>
+            <option value="orders">Follow general orders closely</option>
+            <option value="hybrid">Hybrid - orders + their own judgment</option>
+            <option value="mood">Set mood/strategy, they interpret it</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>What orders can the player give?</label>
+          <p class="hint">Select all that apply</p>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="orders" value="basic">
+              <span>Basic (Attack/Defend/Special)</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="orders" value="target">
+              <span>Target selection</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="orders" value="mood">
+              <span>Mood/strategy (aggressive, cautious, etc.)</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="orders" value="ability">
+              <span>Specific ability commands</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="orders" value="position">
+              <span>Positioning/movement</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="orders" value="item">
+              <span>Use item commands</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>How do monsters get smarter?</label>
+          <p class="hint">Select all that apply</p>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="learning" value="patterns">
+              <span>Learn enemy patterns/weaknesses</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="learning" value="success">
+              <span>Remember what worked before</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="learning" value="tactics">
+              <span>Unlock new tactics over time</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="learning" value="stats">
+              <span>Stats improve with experience</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="learning" value="bond">
+              <span>Better at following orders with higher bond</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="battlePacing">What's the battle pacing?</label>
+          <select id="battlePacing" name="battlePacing">
+            <option value="">Select an option...</option>
+            <option value="realtime">Real-time action</option>
+            <option value="turnbased">Turn-based</option>
+            <option value="atb">Active time battle (ATB gauges)</option>
+            <option value="hybrid">Hybrid (real-time with pauses)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="battleSize">Battle format?</label>
+          <select id="battleSize" name="battleSize">
+            <option value="">Select an option...</option>
+            <option value="1v1">Always 1v1</option>
+            <option value="multi">Multi-monster battles</option>
+            <option value="both">Both depending on context</option>
+            <option value="tag">Tag team (swap mid-battle)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="combatOther">Other thoughts on combat?</label>
+          <textarea id="combatOther" name="combatOther" placeholder="Any ideas about the battle system..."></textarea>
+        </div>
+      </section>
+
+      <!-- WORLD -->
+      <section>
+        <h2>World & Exploration</h2>
+
+        <div class="form-group">
+          <label for="worldSize">How big is the world?</label>
+          <select id="worldSize" name="worldSize">
+            <option value="">Select an option...</option>
+            <option value="small">One town + surrounding wilds</option>
+            <option value="medium">Multiple regions/towns</option>
+            <option value="large">Large open world</option>
+            <option value="hub">Hub-based (town + selectable areas)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>What's in the wilderness?</label>
+          <p class="hint">Select all that apply</p>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="wilderness" value="wild">
+              <span>Wild monsters to fight</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="wilderness" value="resources">
+              <span>Resources to gather</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="wilderness" value="dungeons">
+              <span>Dungeons/caves to explore</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="wilderness" value="secrets">
+              <span>Hidden areas/secrets</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="wilderness" value="npcs">
+              <span>NPCs/travelers</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="wilderness" value="bosses">
+              <span>Boss monsters</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="timeSystem">Day/night or seasons?</label>
+          <select id="timeSystem" name="timeSystem">
+            <option value="">Select an option...</option>
+            <option value="none">No time system</option>
+            <option value="daynight">Day/night cycle</option>
+            <option value="seasons">Seasons</option>
+            <option value="both">Both day/night and seasons</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="mainGoal">Is there a story/goal?</label>
+          <select id="mainGoal" name="mainGoal">
+            <option value="">Select an option...</option>
+            <option value="champion">Become arena champion</option>
+            <option value="story">Story-driven (save the world, etc.)</option>
+            <option value="sandbox">Open-ended sandbox</option>
+            <option value="collection">Collect all monsters</option>
+            <option value="mixed">Mix of story + sandbox</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="worldOther">Other thoughts on the world?</label>
+          <textarea id="worldOther" name="worldOther" placeholder="Any ideas about exploration..."></textarea>
+        </div>
+      </section>
+
+      <!-- ARENA -->
+      <section>
+        <h2>Arena & Progression</h2>
+
+        <div class="form-group">
+          <label for="arenaStructure">What's the arena structure?</label>
+          <select id="arenaStructure" name="arenaStructure">
+            <option value="">Select an option...</option>
+            <option value="tournament">Tournament brackets</option>
+            <option value="ranked">Ranked ladder/tiers</option>
+            <option value="challenge">Challenge specific trainers</option>
+            <option value="mixed">Mix of formats</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>What do you win from arena?</label>
+          <p class="hint">Select all that apply</p>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="rewards" value="money">
+              <span>Money/currency</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="rewards" value="items">
+              <span>Items/equipment</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="rewards" value="reputation">
+              <span>Reputation/rank</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="rewards" value="unlocks">
+              <span>New monster unlocks</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="rewards" value="areas">
+              <span>Access to new areas</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="weightClasses">Are there weight classes/tiers?</label>
+          <select id="weightClasses" name="weightClasses">
+            <option value="">Select an option...</option>
+            <option value="none">No - open competition</option>
+            <option value="level">Level-based tiers</option>
+            <option value="evolution">Evolution tier brackets</option>
+            <option value="points">Point/rating system</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="rivals">NPC rivals/challengers?</label>
+          <select id="rivals" name="rivals">
+            <option value="">Select an option...</option>
+            <option value="none">No named rivals</option>
+            <option value="static">Static opponents</option>
+            <option value="growing">Rivals who grow with you</option>
+            <option value="story">Story-important rivals</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="arenaOther">Other thoughts on arena?</label>
+          <textarea id="arenaOther" name="arenaOther" placeholder="Any ideas about competition..."></textarea>
+        </div>
+      </section>
+
+      <!-- PLAYER ROLE -->
+      <section>
+        <h2>Player's Role</h2>
+
+        <div class="form-group">
+          <label>What does the player do outside battle?</label>
+          <p class="hint">Select all that apply</p>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" name="activities" value="explore">
+              <span>Explore the world</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="activities" value="inventory">
+              <span>Manage inventory/equipment</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="activities" value="npcs">
+              <span>Talk to NPCs</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="activities" value="customize">
+              <span>Customize monsters</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="activities" value="craft">
+              <span>Crafting/cooking</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="activities" value="farm">
+              <span>Farming/base building</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="activities" value="shop">
+              <span>Shopping</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="itemsInBattle">How do items work in battle?</label>
+          <select id="itemsInBattle" name="itemsInBattle">
+            <option value="">Select an option...</option>
+            <option value="throw">Throw items at monster mid-battle</option>
+            <option value="equip">Equip gear beforehand only</option>
+            <option value="command">Give "use item" commands</option>
+            <option value="auto">Monster uses items automatically</option>
+            <option value="mixed">Mix of methods</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="avatar">Player avatar style?</label>
+          <select id="avatar" name="avatar">
+            <option value="">Select an option...</option>
+            <option value="character">Full character who walks around</option>
+            <option value="minimal">Minimal presence (cursor/pointer)</option>
+            <option value="sidelines">Visible on sidelines during battle</option>
+            <option value="customizable">Customizable character</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="playerOther">Other thoughts on player role?</label>
+          <textarea id="playerOther" name="playerOther" placeholder="Any ideas about what the player does..."></textarea>
+        </div>
+      </section>
+
+      <!-- SCOPE -->
+      <section>
+        <h2>Scope Check</h2>
+
+        <div class="form-group">
+          <label for="monsterCount">How many monster species to start?</label>
+          <select id="monsterCount" name="monsterCount">
+            <option value="">Select an option...</option>
+            <option value="tiny">~10 (very focused)</option>
+            <option value="small">~25 (manageable)</option>
+            <option value="medium">~50 (solid variety)</option>
+            <option value="large">100+ (ambitious)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="playtime">Roughly how long should a playthrough be?</label>
+          <select id="playtime" name="playtime">
+            <option value="">Select an option...</option>
+            <option value="short">Few hours (bite-sized)</option>
+            <option value="medium">10-20 hours</option>
+            <option value="long">20+ hours</option>
+            <option value="endless">Endless/sandbox</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="mustHave">What's the MUST-HAVE for v1?</label>
+          <textarea id="mustHave" name="mustHave" placeholder="The core loop that absolutely needs to work..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="canCut">What can be cut if needed?</label>
+          <textarea id="canCut" name="canCut" placeholder="Features that are nice-to-have but not essential..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="finalThoughts">Any other ideas or inspirations?</label>
+          <textarea id="finalThoughts" name="finalThoughts" placeholder="Games you like, features you want, anything else..."></textarea>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="button" class="btn-primary" onclick="exportAnswers()">Export Answers</button>
+        <button type="button" class="btn-secondary" onclick="clearForm()">Clear All</button>
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    function exportAnswers() {
+      const form = document.getElementById('designForm');
+      const formData = new FormData(form);
+      let output = "MONSTER BATTLER - DESIGN ANSWERS\n";
+      output += "================================\n\n";
+
+      // Get all form elements
+      const sections = form.querySelectorAll('section');
+      sections.forEach(section => {
+        const title = section.querySelector('h2').textContent;
+        output += `## ${title}\n\n`;
+
+        const groups = section.querySelectorAll('.form-group');
+        groups.forEach(group => {
+          const label = group.querySelector('label').textContent;
+
+          // Handle select
+          const select = group.querySelector('select');
+          if (select && select.value) {
+            const selectedOption = select.options[select.selectedIndex].text;
+            output += `${label}\n→ ${selectedOption}\n\n`;
+          }
+
+          // Handle checkboxes
+          const checkboxes = group.querySelectorAll('input[type="checkbox"]:checked');
+          if (checkboxes.length > 0) {
+            output += `${label}\n`;
+            checkboxes.forEach(cb => {
+              const text = cb.parentElement.querySelector('span').textContent;
+              output += `→ ${text}\n`;
+            });
+            output += '\n';
+          }
+
+          // Handle textarea
+          const textarea = group.querySelector('textarea');
+          if (textarea && textarea.value.trim()) {
+            output += `${label}\n→ ${textarea.value.trim()}\n\n`;
+          }
+        });
+      });
+
+      // Create download
+      const blob = new Blob([output], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'monster_battler_design.txt';
+      a.click();
+      URL.revokeObjectURL(url);
+
+      alert('Answers exported to monster_battler_design.txt');
+    }
+
+    function clearForm() {
+      if (confirm('Clear all answers?')) {
+        document.getElementById('designForm').reset();
+      }
+    }
+  </script>
+</body>
+</html>
