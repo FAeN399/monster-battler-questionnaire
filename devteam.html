@@ -361,6 +361,11 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label>Specifics</label>
+                <textarea id="specifics" placeholder="What exactly interests you? Any particular systems, art style, etc..."></textarea>
+            </div>
         </section>
 
         <!-- Time -->
@@ -420,7 +425,8 @@
             const name = document.getElementById('name').value || '(no name)';
             const discord = document.getElementById('discord').value || '-';
             const other = document.getElementById('other').value || '-';
-            const notes = document.getElementById('notes').value || 'None';
+            const specifics = document.getElementById('specifics').value || '-';
+            const notes = document.getElementById('notes').value || '-';
 
             const roles = [];
             if (document.getElementById('role-design').checked) roles.push('Game Design');
@@ -440,6 +446,7 @@ Discord: ${discord}
 Other: ${other}
 
 Wants to work on: ${roles.length ? roles.join(', ') : 'Not selected'}
+Specifics: ${specifics}
 Time available: ${time}
 
 Notes: ${notes}`;
@@ -466,6 +473,7 @@ Notes: ${notes}`;
             document.getElementById('name').value = '';
             document.getElementById('discord').value = '';
             document.getElementById('other').value = '';
+            document.getElementById('specifics').value = '';
             document.getElementById('notes').value = '';
             document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
             document.querySelectorAll('input[type="radio"]').forEach(rb => rb.checked = false);
