@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monster Battler - Dev Team Signup</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border-color: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent-blue: #58a6ff;
+            --accent-purple: #a371f7;
+            --accent-orange: #f0883e;
+            --accent-green: #3fb950;
+            --accent-red: #f85149;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a2535, #1f2d47);
+            border: 1px solid var(--border-color);
+            padding: 50px 40px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff, var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: var(--accent-green);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--accent-blue);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h3 {
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .info-box ol {
+            color: var(--text-secondary);
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .info-box li {
+            margin-bottom: 5px;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-purple);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        /* Form Fields */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-group .required {
+            color: var(--accent-red);
+        }
+
+        .form-group .hint {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 400;
+            margin-left: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 3px rgba(163, 113, 247, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Role Selection */
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .role-option {
+            position: relative;
+        }
+
+        .role-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .role-option label {
+            display: block;
+            padding: 12px 15px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .role-option input:checked + label {
+            background: rgba(163, 113, 247, 0.2);
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+
+        .role-option label:hover {
+            border-color: var(--text-muted);
+        }
+
+        /* Availability */
+        .availability-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .availability-option {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .availability-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .availability-option label {
+            display: block;
+            padding: 10px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .availability-option input:checked + label {
+            background: rgba(63, 185, 80, 0.2);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        /* Export Section */
+        .export-section {
+            background: linear-gradient(135deg, #1a2520, #1f3025);
+            border: 2px solid var(--accent-green);
+        }
+
+        .export-section .section-title {
+            border-bottom-color: var(--accent-green);
+        }
+
+        .export-section .section-icon {
+            background: var(--accent-green);
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent-green);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #4cc764;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .btn-copy {
+            background: var(--accent-purple);
+            color: #000;
+        }
+
+        .btn-copy:hover {
+            background: #b48bfa;
+        }
+
+        /* Preview Box */
+        .preview-box {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--accent-green);
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Navigation */
+        .nav-back {
+            margin-bottom: 20px;
+        }
+
+        .nav-back a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+
+        .nav-back a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="nav-back">
+            <a href="index.html">&larr; Back to Questionnaires</a>
+        </nav>
+
+        <!-- Header -->
+        <header class="header">
+            <h1>Dev Team Signup</h1>
+            <p class="subtitle">Join the Monster Battler development team</p>
+            <span class="badge">Open for Applications</span>
+        </header>
+
+        <!-- Info Box -->
+        <div class="info-box">
+            <h3>How This Works</h3>
+            <p>Fill out your information below, then export it and send to the project lead to be added to the team.</p>
+            <ol>
+                <li>Complete all required fields</li>
+                <li>Click "Generate Export" to create your application</li>
+                <li>Copy the text and send via Discord or Email</li>
+            </ol>
+        </div>
+
+        <!-- Basic Info -->
+        <section class="form-section">
+            <h2 class="section-title">
+                <span class="section-icon">1</span>
+                Basic Information
+            </h2>
+
+            <div class="form-group">
+                <label>Name <span class="required">*</span></label>
+                <input type="text" id="name" placeholder="Your name or handle">
+            </div>
+
+            <div class="two-col">
+                <div class="form-group">
+                    <label>Email <span class="required">*</span></label>
+                    <input type="email" id="email" placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone <span class="hint">(optional)</span></label>
+                    <input type="tel" id="phone" placeholder="+1 234 567 8900">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Location / Timezone <span class="hint">(optional)</span></label>
+                <input type="text" id="timezone" placeholder="e.g., EST, PST, GMT+1">
+            </div>
+        </section>
+
+        <!-- Contact Methods -->
+        <section class="form-section">
+            <h2 class="section-title">
+                <span class="section-icon">2</span>
+                Contact Methods
+            </h2>
+
+            <div class="two-col">
+                <div class="form-group">
+                    <label>Discord <span class="hint">(preferred)</span></label>
+                    <input type="text" id="discord" placeholder="username#1234 or username">
+                </div>
+                <div class="form-group">
+                    <label>GitHub</label>
+                    <input type="text" id="github" placeholder="github.com/username">
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="form-group">
+                    <label>Twitter / X</label>
+                    <input type="text" id="twitter" placeholder="@username">
+                </div>
+                <div class="form-group">
+                    <label>Other Platform</label>
+                    <input type="text" id="other-contact" placeholder="Any other way to reach you">
+                </div>
+            </div>
+        </section>
+
+        <!-- Role & Skills -->
+        <section class="form-section">
+            <h2 class="section-title">
+                <span class="section-icon">3</span>
+                Role & Skills
+            </h2>
+
+            <div class="form-group">
+                <label>What role(s) interest you? <span class="hint">(select all that apply)</span></label>
+                <div class="role-grid">
+                    <div class="role-option">
+                        <input type="checkbox" id="role-design" name="role">
+                        <label for="role-design">Game Design</label>
+                    </div>
+                    <div class="role-option">
+                        <input type="checkbox" id="role-programming" name="role">
+                        <label for="role-programming">Programming</label>
+                    </div>
+                    <div class="role-option">
+                        <input type="checkbox" id="role-art" name="role">
+                        <label for="role-art">Art / Sprites</label>
+                    </div>
+                    <div class="role-option">
+                        <input type="checkbox" id="role-music" name="role">
+                        <label for="role-music">Music / SFX</label>
+                    </div>
+                    <div class="role-option">
+                        <input type="checkbox" id="role-writing" name="role">
+                        <label for="role-writing">Writing</label>
+                    </div>
+                    <div class="role-option">
+                        <input type="checkbox" id="role-testing" name="role">
+                        <label for="role-testing">QA / Testing</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Relevant Skills & Experience</label>
+                <textarea id="skills" placeholder="List any relevant skills, tools you know, or previous projects you've worked on..."></textarea>
+            </div>
+        </section>
+
+        <!-- Availability -->
+        <section class="form-section">
+            <h2 class="section-title">
+                <span class="section-icon">4</span>
+                Availability
+            </h2>
+
+            <div class="form-group">
+                <label>How much time can you commit per week?</label>
+                <div class="availability-grid">
+                    <div class="availability-option">
+                        <input type="radio" id="avail-1" name="availability" value="1-5 hours">
+                        <label for="avail-1">1-5 hrs</label>
+                    </div>
+                    <div class="availability-option">
+                        <input type="radio" id="avail-2" name="availability" value="5-10 hours">
+                        <label for="avail-2">5-10 hrs</label>
+                    </div>
+                    <div class="availability-option">
+                        <input type="radio" id="avail-3" name="availability" value="10-20 hours">
+                        <label for="avail-3">10-20 hrs</label>
+                    </div>
+                    <div class="availability-option">
+                        <input type="radio" id="avail-4" name="availability" value="20+ hours">
+                        <label for="avail-4">20+ hrs</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Info -->
+        <section class="form-section">
+            <h2 class="section-title">
+                <span class="section-icon">5</span>
+                Additional Information
+            </h2>
+
+            <div class="form-group">
+                <label>Anything else you'd like to share?</label>
+                <textarea id="additional" placeholder="Tell us about yourself, why you're interested in the project, links to your work, questions you have, or anything else..."></textarea>
+            </div>
+        </section>
+
+        <!-- Export Section -->
+        <section class="form-section export-section">
+            <h2 class="section-title">
+                <span class="section-icon">&#10003;</span>
+                Export Your Application
+            </h2>
+
+            <p style="color: var(--text-secondary); margin-bottom: 15px;">
+                Click the button below to generate your application text, then copy and send it to the project lead.
+            </p>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="generateExport()">Generate Export</button>
+                <button class="btn btn-copy" onclick="copyToClipboard()">Copy to Clipboard</button>
+                <button class="btn btn-secondary" onclick="clearForm()">Clear Form</button>
+            </div>
+
+            <div class="preview-box" id="preview">
+                Your application preview will appear here...
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Monster Battler &bull; <a href="blueprint.html">View Game Design Document</a></p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Copied to clipboard!</div>
+
+    <script>
+        function generateExport() {
+            const name = document.getElementById('name').value || 'Not provided';
+            const email = document.getElementById('email').value || 'Not provided';
+            const phone = document.getElementById('phone').value || 'Not provided';
+            const timezone = document.getElementById('timezone').value || 'Not provided';
+            const discord = document.getElementById('discord').value || 'Not provided';
+            const github = document.getElementById('github').value || 'Not provided';
+            const twitter = document.getElementById('twitter').value || 'Not provided';
+            const otherContact = document.getElementById('other-contact').value || 'Not provided';
+            const skills = document.getElementById('skills').value || 'Not provided';
+            const additional = document.getElementById('additional').value || 'None';
+
+            // Get selected roles
+            const roles = [];
+            if (document.getElementById('role-design').checked) roles.push('Game Design');
+            if (document.getElementById('role-programming').checked) roles.push('Programming');
+            if (document.getElementById('role-art').checked) roles.push('Art / Sprites');
+            if (document.getElementById('role-music').checked) roles.push('Music / SFX');
+            if (document.getElementById('role-writing').checked) roles.push('Writing');
+            if (document.getElementById('role-testing').checked) roles.push('QA / Testing');
+            const rolesText = roles.length > 0 ? roles.join(', ') : 'Not selected';
+
+            // Get availability
+            const availabilityEl = document.querySelector('input[name="availability"]:checked');
+            const availability = availabilityEl ? availabilityEl.value : 'Not selected';
+
+            const exportText = `========================================
+MONSTER BATTLER - DEV TEAM APPLICATION
+========================================
+
+BASIC INFORMATION
+-----------------
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Timezone: ${timezone}
+
+CONTACT METHODS
+---------------
+Discord: ${discord}
+GitHub: ${github}
+Twitter/X: ${twitter}
+Other: ${otherContact}
+
+ROLE & SKILLS
+-------------
+Interested Roles: ${rolesText}
+
+Skills & Experience:
+${skills}
+
+AVAILABILITY
+------------
+Weekly Commitment: ${availability}
+
+ADDITIONAL NOTES
+----------------
+${additional}
+
+========================================
+Submitted: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}
+========================================`;
+
+            document.getElementById('preview').textContent = exportText;
+        }
+
+        function copyToClipboard() {
+            const preview = document.getElementById('preview');
+            const text = preview.textContent;
+
+            if (text === 'Your application preview will appear here...') {
+                generateExport();
+            }
+
+            navigator.clipboard.writeText(document.getElementById('preview').textContent).then(() => {
+                showToast('Copied to clipboard!');
+            }).catch(err => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = document.getElementById('preview').textContent;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('Copied to clipboard!');
+            });
+        }
+
+        function clearForm() {
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('timezone').value = '';
+            document.getElementById('discord').value = '';
+            document.getElementById('github').value = '';
+            document.getElementById('twitter').value = '';
+            document.getElementById('other-contact').value = '';
+            document.getElementById('skills').value = '';
+            document.getElementById('additional').value = '';
+
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.querySelectorAll('input[type="radio"]').forEach(rb => rb.checked = false);
+
+            document.getElementById('preview').textContent = 'Your application preview will appear here...';
+            showToast('Form cleared');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
