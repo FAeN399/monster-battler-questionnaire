@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monster Battler - Questionnaires</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border-color: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent-blue: #58a6ff;
+            --accent-purple: #a371f7;
+            --accent-orange: #f0883e;
+            --accent-green: #3fb950;
+            --accent-teal: #2dd4bf;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+            padding: 24px 16px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 10px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            border-color: var(--text-muted);
+            color: var(--text-primary);
+        }
+
+        nav a.active {
+            color: var(--accent-teal);
+            border-color: var(--accent-teal);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Cards */
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 8px 30px rgba(163, 113, 247, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-left: 66px;
+        }
+
+        .card-framework .card-icon { background: rgba(45, 212, 191, 0.15); }
+        .card-project .card-icon { background: rgba(88, 166, 255, 0.15); }
+        .card-technical .card-icon { background: rgba(240, 136, 62, 0.15); }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        @media (max-width: 500px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card p {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../questionnaires/" class="active">Questionnaires</a>
+            <a href="../blueprint.html">Blueprint</a>
+            <a href="../team.html">Team</a>
+        </nav>
+
+        <header>
+            <h1>Project Questionnaires</h1>
+            <p>Fill these out to help define the game's direction</p>
+        </header>
+
+        <div class="cards">
+            <a href="framework.html" class="card card-framework">
+                <div class="card-header">
+                    <div class="card-icon">&#x1F3AF;</div>
+                    <h2>Framework</h2>
+                </div>
+                <p>Core fantasy, combat feel, monster relationships, and design priorities. The big-picture vision questions.</p>
+            </a>
+
+            <a href="project.html" class="card card-project">
+                <div class="card-header">
+                    <div class="card-icon">&#x1F4C1;</div>
+                    <h2>Project Info</h2>
+                </div>
+                <p>Game identity, team information, branding, distribution plans, and business details.</p>
+            </a>
+
+            <a href="technical.html" class="card card-technical">
+                <div class="card-header">
+                    <div class="card-icon">&#x2699;</div>
+                    <h2>Technical Specs</h2>
+                </div>
+                <p>Engine choice, platform targets, AI systems, breeding formulas, and implementation priorities.</p>
+            </a>
+        </div>
+
+        <footer>
+            <p>Ready to see the full design? <a href="../blueprint.html">View the Blueprint</a></p>
+        </footer>
+    </div>
+</body>
+</html>
