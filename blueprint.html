@@ -7,40 +7,30 @@
     <style>
         :root {
             --primary: #6366f1;
-            --primary-dark: #4f46e5;
             --bg: #0f172a;
             --bg-card: #1e293b;
-            --bg-code: #0d1117;
             --text: #e2e8f0;
             --text-muted: #94a3b8;
             --border: #334155;
             --accent-green: #22c55e;
             --accent-yellow: #eab308;
             --accent-red: #ef4444;
-            --accent-blue: #3b82f6;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
             padding: 2rem;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1000px; margin: 0 auto; }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             background: linear-gradient(135deg, var(--primary), #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -48,2057 +38,682 @@
             margin-bottom: 0.5rem;
         }
 
-        h2 {
-            font-size: 1.75rem;
-            color: var(--primary);
-            margin: 2.5rem 0 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border);
+        .subtitle { color: var(--text-muted); margin-bottom: 2rem; }
+
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        h3 {
-            font-size: 1.25rem;
-            color: var(--text);
-            margin: 1.5rem 0 0.75rem;
-        }
-
-        h4 {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin: 1rem 0 0.5rem;
-        }
-
-        p {
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
             margin-bottom: 1rem;
         }
 
-        .subtitle {
-            color: var(--text-muted);
+        h2 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        h3 {
             font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .meta {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid var(--border);
-            margin: 2rem 0;
-        }
-
-        blockquote {
-            background: var(--bg-card);
-            border-left: 4px solid var(--primary);
-            padding: 1rem 1.5rem;
-            margin: 1rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        blockquote p:last-child {
-            margin-bottom: 0;
-        }
-
-        code {
-            background: var(--bg-code);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 0.9em;
-            color: #f472b6;
-        }
-
-        pre {
-            background: var(--bg-code);
-            padding: 1.5rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 1rem 0;
-            border: 1px solid var(--border);
-        }
-
-        pre code {
-            background: none;
-            padding: 0;
             color: var(--text);
-            font-size: 0.85rem;
-            line-height: 1.5;
+            margin: 1.25rem 0 0.5rem;
         }
+
+        p { margin-bottom: 0.75rem; }
+
+        .confirmed {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 3px solid var(--accent-green);
+            padding: 0.75rem 1rem;
+            margin: 0.75rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .tbd {
+            background: rgba(234, 179, 8, 0.1);
+            border-left: 3px solid var(--accent-yellow);
+            padding: 0.75rem 1rem;
+            margin: 0.75rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .question {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 3px solid var(--primary);
+            padding: 0.75rem 1rem;
+            margin: 0.75rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .badge-confirmed { background: var(--accent-green); color: #000; }
+        .badge-tbd { background: var(--accent-yellow); color: #000; }
+        .badge-question { background: var(--primary); color: #fff; }
+
+        ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+        li { margin-bottom: 0.4rem; }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
-            background: var(--bg-card);
-            border-radius: 8px;
-            overflow: hidden;
+            font-size: 0.9rem;
         }
-
         th, td {
-            padding: 0.75rem 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        th {
-            background: var(--bg-code);
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover {
-            background: rgba(99, 102, 241, 0.1);
-        }
-
-        .toc {
-            background: var(--bg-card);
-            padding: 1.5rem 2rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-        }
-
-        .toc h2 {
-            margin-top: 0;
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .toc ol {
-            padding-left: 1.5rem;
-        }
-
-        .toc li {
-            margin: 0.5rem 0;
-        }
-
-        .toc a {
-            color: var(--text);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .toc a:hover {
-            color: var(--primary);
-        }
-
-        .card {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 1rem 0;
             border: 1px solid var(--border);
+            padding: 0.6rem;
+            text-align: left;
         }
+        th { background: var(--bg); color: var(--primary); }
 
-        .priority-must { color: var(--accent-green); font-weight: bold; }
-        .priority-cut { color: var(--accent-yellow); }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 600;
+        .feedback-box {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border);
         }
-
-        .badge-common { background: #374151; color: #9ca3af; }
-        .badge-uncommon { background: #166534; color: #86efac; }
-        .badge-rare { background: #1e40af; color: #93c5fd; }
-        .badge-very-rare { background: #7c2d12; color: #fdba74; }
-
-        ul, ol {
-            padding-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        li {
-            margin: 0.25rem 0;
-        }
-
-        strong {
-            color: #fff;
-        }
-
-        a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .section {
-            margin-bottom: 3rem;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid var(--accent-blue);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-
-        .decision-needed {
-            background: rgba(234, 179, 8, 0.1);
-            border: 1px solid var(--accent-yellow);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-
-        .checklist {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .checklist li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .checklist li::before {
-            content: "[ ]";
-            position: absolute;
-            left: 0;
+        .feedback-box label {
+            display: block;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            font-family: monospace;
+            margin-bottom: 0.4rem;
+        }
+        .feedback-box textarea {
+            width: 100%;
+            min-height: 60px;
+            padding: 0.75rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+        .feedback-box textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .feedback-box .btn-row {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .feedback-box button {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-approve { background: var(--accent-green); color: #000; }
+        .btn-revise { background: var(--accent-yellow); color: #000; }
+        .btn-scrap { background: var(--accent-red); color: #fff; }
+
+        .placeholder {
+            color: var(--accent-yellow);
+            font-style: italic;
         }
 
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
-            h1 {
-                font-size: 1.75rem;
-            }
-
-            table {
-                font-size: 0.85rem;
-            }
-
-            th, td {
-                padding: 0.5rem;
-            }
-
-            pre {
-                padding: 1rem;
-                font-size: 0.75rem;
-            }
+        .actions {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.75rem;
         }
+        .actions button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .btn-export { background: var(--primary); color: #fff; }
+        .btn-clear { background: var(--bg-card); color: var(--text); border: 1px solid var(--border); }
     </style>
 </head>
 <body>
-    <nav style="max-width:1100px;margin:0 auto 24px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+    <nav style="max-width:1000px;margin:0 auto 24px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
       <a href="index.html" style="color:#94a3b8;text-decoration:none;padding:8px 16px;background:#1e293b;border:1px solid #334155;border-radius:6px;">Framework</a>
       <a href="project.html" style="color:#94a3b8;text-decoration:none;padding:8px 16px;background:#1e293b;border:1px solid #334155;border-radius:6px;">Project</a>
       <a href="technical.html" style="color:#94a3b8;text-decoration:none;padding:8px 16px;background:#1e293b;border:1px solid #334155;border-radius:6px;">Technical</a>
       <a href="blueprint.html" style="color:#FBBF24;text-decoration:none;padding:8px 16px;background:#1e293b;border:1px solid #FBBF24;border-radius:6px;font-weight:600;">Blueprint ★</a>
     </nav>
+
     <div class="container">
         <header>
-            <h1>MONSTER BATTLER - FOUNDATION BLUEPRINT</h1>
-            <p class="subtitle">RPG Maker MZ Game Design Document</p>
-            <p class="meta"><strong>Version:</strong> 1.0 (Draft for Team Review) | <strong>Last Updated:</strong> December 2024</p>
+            <h1>MONSTER BATTLER</h1>
+            <p class="subtitle">Foundation Blueprint — Review Draft</p>
         </header>
 
-        <hr>
+        <!-- CORE CONCEPT -->
+        <div class="section" data-section="core-concept">
+            <div class="section-header">
+                <h2>1. Core Concept</h2>
+                <span class="badge badge-confirmed">Confirmed</span>
+            </div>
 
-        <blockquote>
-            <p><strong>HOW TO USE THIS DOCUMENT</strong></p>
-            <p>Items marked with <code>[PLACEHOLDER]</code> need team input for names, descriptions, etc.<br>
-            Items marked with <code>[EXAMPLE: value]</code> have suggested values that can be adjusted.</p>
-            <p><strong>To update:</strong> Fill in your decisions and return this document to the project. All instances will be updated accordingly.</p>
-        </blockquote>
+            <div class="confirmed">
+                <strong>Elevator Pitch:</strong> "Digimon World meets Link to the Past" — Raise monsters, breed them across generations to create powerful hybrids, and battle your way through arena ranks to become Grand Champion.
+            </div>
 
-        <hr>
-
-        <nav class="toc">
-            <h2>TABLE OF CONTENTS</h2>
-            <ol>
-                <li><a href="#game-overview">Game Overview</a></li>
-                <li><a href="#monster-system">Monster System</a></li>
-                <li><a href="#breeding-system">Breeding System</a></li>
-                <li><a href="#combat-system">Combat System</a></li>
-                <li><a href="#world-progression">World & Progression</a></li>
-                <li><a href="#data-architecture">Data Architecture</a></li>
-                <li><a href="#team-decision-checklist">Team Decision Checklist</a></li>
-            </ol>
-        </nav>
-
-        <hr>
-
-        <!-- SECTION 1: GAME OVERVIEW -->
-        <section id="game-overview" class="section">
-            <h1>1. GAME OVERVIEW</h1>
-
-            <h2>Core Fantasy</h2>
-            <p><strong>Monster breeding, training, and battling</strong> - Fast-paced, real-time action where the player acts as commander/coach of their monster team.</p>
-
-            <h2>Elevator Pitch</h2>
-            <blockquote>
-                <p>"Digimon World meets Link to the Past" - Raise monsters, breed them across generations to create powerful hybrids, and battle your way through arena ranks to become Grand Champion.</p>
-            </blockquote>
-
-            <h2>The "Hell Yeah" Moment</h2>
+            <h3>The "Hell Yeah" Moment</h3>
             <p>Finding a cool combination of breeding, using awesome abilities, and executing fun tactics with perfect timing.</p>
 
-            <h2>Priority Features (MVP)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Priority</th>
-                        <th>Feature</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Monster Breeding</td>
-                        <td class="priority-must">Must Have</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Real-time Combat</td>
-                        <td class="priority-must">Must Have</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Arena System</td>
-                        <td class="priority-must">Must Have</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Base Building</td>
-                        <td class="priority-cut">Can Cut</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Item Crafting</td>
-                        <td class="priority-cut">Can Cut</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h3>Target Playtime</h3>
+            <div class="confirmed">40-60 hours to become Grand Champion</div>
 
-            <h2>Target Playtime</h2>
-            <p><code>[EXAMPLE: 40-60 hours]</code> to become Grand Champion</p>
-        </section>
+            <div class="feedback-box">
+                <label>Your thoughts on this section:</label>
+                <textarea placeholder="Approve, suggest changes, or mark for removal..."></textarea>
+                <div class="btn-row">
+                    <button class="btn-approve" onclick="markSection(this, 'approved')">✓ Approve</button>
+                    <button class="btn-revise" onclick="markSection(this, 'revise')">✎ Needs Revision</button>
+                    <button class="btn-scrap" onclick="markSection(this, 'scrap')">✕ Scrap</button>
+                </div>
+            </div>
+        </div>
 
-        <hr>
-
-        <!-- SECTION 2: MONSTER SYSTEM -->
-        <section id="monster-system" class="section">
-            <h1>2. MONSTER SYSTEM</h1>
-
-            <h2>2.1 Species Overview</h2>
-            <p>There are <strong>4 species</strong>, each with a distinct theme and home region:</p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Species</th>
-                        <th>Theme</th>
-                        <th>Home Region</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Insect</strong></td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>Starting Area</td>
-                        <td><code>[PLACEHOLDER: Species description]</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Mammal</strong></td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>Region 2</td>
-                        <td><code>[PLACEHOLDER: Species description]</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Reptilian</strong></td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>Region 3</td>
-                        <td><code>[PLACEHOLDER: Species description]</code></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Avian</strong></td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>Region 4</td>
-                        <td><code>[PLACEHOLDER: Species description]</code></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h2>2.2 Generation System</h2>
-            <p>Each species has <strong>4 generations</strong> of monsters:</p>
-
-            <pre><code>GENERATION STRUCTURE (Per Species)
-==================================
-
-Gen 1: 4 Starter Types (A, B, C, D)
-         ↓ Breed within Gen 1
-Gen 2: 6 Combinations (AB, AC, AD, BC, BD, CD)
-         ↓ Breed within Gen 2
-Gen 3: 15 Combinations (all pairs of Gen 2)
-         ↓ Cross-species breeding (secret)
-Gen 4: Special hybrids (cross-species)
-
-TOTAL PER SPECIES: 4 + 6 + 15 = 25 monsters
-TOTAL ALL SPECIES: 25 × 4 = 100 monsters
-SECRET GEN 4: 6+ additional cross-species monsters
-GRAND TOTAL: 106+ unique monster types</code></pre>
-
-            <h2>2.3 Monster Roster: INSECT Species</h2>
-
-            <h3>Generation 1 - Starters</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Type Focus</th>
-                        <th>Base Stats</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>INS-1A</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>STR</td>
-                        <td><code>[EXAMPLE: 12/8/10/10]</code></td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                    </tr>
-                    <tr>
-                        <td>INS-1B</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>INT</td>
-                        <td><code>[EXAMPLE: 8/12/10/10]</code></td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                    </tr>
-                    <tr>
-                        <td>INS-1C</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>AGI</td>
-                        <td><code>[EXAMPLE: 10/10/12/8]</code></td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                    </tr>
-                    <tr>
-                        <td>INS-1D</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>END</td>
-                        <td><code>[EXAMPLE: 10/8/8/14]</code></td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Generation 2 - First Breeds</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Parents</th>
-                        <th>Type Focus</th>
-                        <th>Base Stats</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>INS-2AB</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>INS-1A + INS-1B</td>
-                        <td>STR/INT</td>
-                        <td><code>[EXAMPLE: 11/11/10/10]</code></td>
-                    </tr>
-                    <tr>
-                        <td>INS-2AC</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>INS-1A + INS-1C</td>
-                        <td>STR/AGI</td>
-                        <td><code>[EXAMPLE: 12/9/12/9]</code></td>
-                    </tr>
-                    <tr>
-                        <td>INS-2AD</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>INS-1A + INS-1D</td>
-                        <td>STR/END</td>
-                        <td><code>[EXAMPLE: 12/8/9/13]</code></td>
-                    </tr>
-                    <tr>
-                        <td>INS-2BC</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>INS-1B + INS-1C</td>
-                        <td>INT/AGI</td>
-                        <td><code>[EXAMPLE: 9/12/12/9]</code></td>
-                    </tr>
-                    <tr>
-                        <td>INS-2BD</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>INS-1B + INS-1D</td>
-                        <td>INT/END</td>
-                        <td><code>[EXAMPLE: 9/11/9/13]</code></td>
-                    </tr>
-                    <tr>
-                        <td>INS-2CD</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>INS-1C + INS-1D</td>
-                        <td>AGI/END</td>
-                        <td><code>[EXAMPLE: 10/9/11/12]</code></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Generation 3 - Advanced Breeds</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Parents</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>INS-3-01</td><td><code>[PLACEHOLDER]</code></td><td>INS-2AB + INS-2AC</td><td></td></tr>
-                    <tr><td>INS-3-02</td><td><code>[PLACEHOLDER]</code></td><td>INS-2AB + INS-2AD</td><td></td></tr>
-                    <tr><td>INS-3-03</td><td><code>[PLACEHOLDER]</code></td><td>INS-2AB + INS-2BC</td><td></td></tr>
-                    <tr><td>INS-3-04</td><td><code>[PLACEHOLDER]</code></td><td>INS-2AB + INS-2BD</td><td></td></tr>
-                    <tr><td>INS-3-05</td><td><code>[PLACEHOLDER]</code></td><td>INS-2AB + INS-2CD</td><td></td></tr>
-                    <tr><td>INS-3-06</td><td><code>[PLACEHOLDER]</code></td><td>INS-2AC + INS-2AD</td><td></td></tr>
-                    <tr><td>INS-3-07</td><td><code>[PLACEHOLDER]</code></td><td>INS-2AC + INS-2BC</td><td></td></tr>
-                    <tr><td>INS-3-08</td><td><code>[PLACEHOLDER]</code></td><td>INS-2AC + INS-2BD</td><td></td></tr>
-                    <tr><td>INS-3-09</td><td><code>[PLACEHOLDER]</code></td><td>INS-2AC + INS-2CD</td><td></td></tr>
-                    <tr><td>INS-3-10</td><td><code>[PLACEHOLDER]</code></td><td>INS-2AD + INS-2BC</td><td></td></tr>
-                    <tr><td>INS-3-11</td><td><code>[PLACEHOLDER]</code></td><td>INS-2AD + INS-2BD</td><td></td></tr>
-                    <tr><td>INS-3-12</td><td><code>[PLACEHOLDER]</code></td><td>INS-2AD + INS-2CD</td><td></td></tr>
-                    <tr><td>INS-3-13</td><td><code>[PLACEHOLDER]</code></td><td>INS-2BC + INS-2BD</td><td></td></tr>
-                    <tr><td>INS-3-14</td><td><code>[PLACEHOLDER]</code></td><td>INS-2BC + INS-2CD</td><td></td></tr>
-                    <tr><td>INS-3-15</td><td><code>[PLACEHOLDER]</code></td><td>INS-2BD + INS-2CD</td><td></td></tr>
-                </tbody>
-            </table>
-
-            <h2>2.4 Monster Roster: MAMMAL Species</h2>
-
-            <h3>Generation 1 - Starters</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Type Focus</th>
-                        <th>Base Stats</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>MAM-1A</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>STR</td>
-                        <td><code>[EXAMPLE: 14/7/9/10]</code></td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                    </tr>
-                    <tr>
-                        <td>MAM-1B</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>INT</td>
-                        <td><code>[EXAMPLE: 7/14/10/9]</code></td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                    </tr>
-                    <tr>
-                        <td>MAM-1C</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>AGI</td>
-                        <td><code>[EXAMPLE: 9/9/14/8]</code></td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                    </tr>
-                    <tr>
-                        <td>MAM-1D</td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                        <td>END</td>
-                        <td><code>[EXAMPLE: 10/8/7/15]</code></td>
-                        <td><code>[PLACEHOLDER]</code></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Generation 2 - First Breeds</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Parents</th>
-                        <th>Type Focus</th>
-                        <th>Base Stats</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>MAM-2AB</td><td><code>[PLACEHOLDER]</code></td><td>MAM-1A + MAM-1B</td><td>STR/INT</td><td><code>[EXAMPLE: 11/11/10/10]</code></td></tr>
-                    <tr><td>MAM-2AC</td><td><code>[PLACEHOLDER]</code></td><td>MAM-1A + MAM-1C</td><td>STR/AGI</td><td><code>[EXAMPLE: 12/8/12/10]</code></td></tr>
-                    <tr><td>MAM-2AD</td><td><code>[PLACEHOLDER]</code></td><td>MAM-1A + MAM-1D</td><td>STR/END</td><td><code>[EXAMPLE: 13/8/8/13]</code></td></tr>
-                    <tr><td>MAM-2BC</td><td><code>[PLACEHOLDER]</code></td><td>MAM-1B + MAM-1C</td><td>INT/AGI</td><td><code>[EXAMPLE: 8/12/12/10]</code></td></tr>
-                    <tr><td>MAM-2BD</td><td><code>[PLACEHOLDER]</code></td><td>MAM-1B + MAM-1D</td><td>INT/END</td><td><code>[EXAMPLE: 9/12/9/12]</code></td></tr>
-                    <tr><td>MAM-2CD</td><td><code>[PLACEHOLDER]</code></td><td>MAM-1C + MAM-1D</td><td>AGI/END</td><td><code>[EXAMPLE: 10/9/11/12]</code></td></tr>
-                </tbody>
-            </table>
-
-            <h3>Generation 3 - Advanced Breeds</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Parents</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>MAM-3-01</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2AB + MAM-2AC</td></tr>
-                    <tr><td>MAM-3-02</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2AB + MAM-2AD</td></tr>
-                    <tr><td>MAM-3-03</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2AB + MAM-2BC</td></tr>
-                    <tr><td>MAM-3-04</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2AB + MAM-2BD</td></tr>
-                    <tr><td>MAM-3-05</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2AB + MAM-2CD</td></tr>
-                    <tr><td>MAM-3-06</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2AC + MAM-2AD</td></tr>
-                    <tr><td>MAM-3-07</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2AC + MAM-2BC</td></tr>
-                    <tr><td>MAM-3-08</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2AC + MAM-2BD</td></tr>
-                    <tr><td>MAM-3-09</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2AC + MAM-2CD</td></tr>
-                    <tr><td>MAM-3-10</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2AD + MAM-2BC</td></tr>
-                    <tr><td>MAM-3-11</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2AD + MAM-2BD</td></tr>
-                    <tr><td>MAM-3-12</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2AD + MAM-2CD</td></tr>
-                    <tr><td>MAM-3-13</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2BC + MAM-2BD</td></tr>
-                    <tr><td>MAM-3-14</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2BC + MAM-2CD</td></tr>
-                    <tr><td>MAM-3-15</td><td><code>[PLACEHOLDER]</code></td><td>MAM-2BD + MAM-2CD</td></tr>
-                </tbody>
-            </table>
-
-            <h2>2.5 Monster Roster: REPTILIAN Species</h2>
-
-            <h3>Generation 1 - Starters</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Type Focus</th>
-                        <th>Base Stats</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>REP-1A</td><td><code>[PLACEHOLDER]</code></td><td>STR</td><td><code>[EXAMPLE: 13/8/8/11]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>REP-1B</td><td><code>[PLACEHOLDER]</code></td><td>INT</td><td><code>[EXAMPLE: 8/13/9/10]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>REP-1C</td><td><code>[PLACEHOLDER]</code></td><td>AGI</td><td><code>[EXAMPLE: 9/10/13/8]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>REP-1D</td><td><code>[PLACEHOLDER]</code></td><td>END</td><td><code>[EXAMPLE: 11/7/8/14]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                </tbody>
-            </table>
-
-            <h3>Generation 2 - First Breeds</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Parents</th>
-                        <th>Type Focus</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>REP-2AB</td><td><code>[PLACEHOLDER]</code></td><td>REP-1A + REP-1B</td><td>STR/INT</td></tr>
-                    <tr><td>REP-2AC</td><td><code>[PLACEHOLDER]</code></td><td>REP-1A + REP-1C</td><td>STR/AGI</td></tr>
-                    <tr><td>REP-2AD</td><td><code>[PLACEHOLDER]</code></td><td>REP-1A + REP-1D</td><td>STR/END</td></tr>
-                    <tr><td>REP-2BC</td><td><code>[PLACEHOLDER]</code></td><td>REP-1B + REP-1C</td><td>INT/AGI</td></tr>
-                    <tr><td>REP-2BD</td><td><code>[PLACEHOLDER]</code></td><td>REP-1B + REP-1D</td><td>INT/END</td></tr>
-                    <tr><td>REP-2CD</td><td><code>[PLACEHOLDER]</code></td><td>REP-1C + REP-1D</td><td>AGI/END</td></tr>
-                </tbody>
-            </table>
-
-            <h3>Generation 3 - Advanced Breeds</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Parents</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>REP-3-01 through REP-3-15</td><td><code>[PLACEHOLDER]</code></td><td>(Same pattern as other species)</td></tr>
-                </tbody>
-            </table>
-
-            <h2>2.6 Monster Roster: AVIAN Species</h2>
-
-            <h3>Generation 1 - Starters</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Type Focus</th>
-                        <th>Base Stats</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>AVI-1A</td><td><code>[PLACEHOLDER]</code></td><td>STR</td><td><code>[EXAMPLE: 11/9/12/8]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>AVI-1B</td><td><code>[PLACEHOLDER]</code></td><td>INT</td><td><code>[EXAMPLE: 8/14/11/7]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>AVI-1C</td><td><code>[PLACEHOLDER]</code></td><td>AGI</td><td><code>[EXAMPLE: 9/9/15/7]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>AVI-1D</td><td><code>[PLACEHOLDER]</code></td><td>END</td><td><code>[EXAMPLE: 10/8/10/12]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                </tbody>
-            </table>
-
-            <h3>Generation 2 - First Breeds</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Parents</th>
-                        <th>Type Focus</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>AVI-2AB</td><td><code>[PLACEHOLDER]</code></td><td>AVI-1A + AVI-1B</td><td>STR/INT</td></tr>
-                    <tr><td>AVI-2AC</td><td><code>[PLACEHOLDER]</code></td><td>AVI-1A + AVI-1C</td><td>STR/AGI</td></tr>
-                    <tr><td>AVI-2AD</td><td><code>[PLACEHOLDER]</code></td><td>AVI-1A + AVI-1D</td><td>STR/END</td></tr>
-                    <tr><td>AVI-2BC</td><td><code>[PLACEHOLDER]</code></td><td>AVI-1B + AVI-1C</td><td>INT/AGI</td></tr>
-                    <tr><td>AVI-2BD</td><td><code>[PLACEHOLDER]</code></td><td>AVI-1B + AVI-1D</td><td>INT/END</td></tr>
-                    <tr><td>AVI-2CD</td><td><code>[PLACEHOLDER]</code></td><td>AVI-1C + AVI-1D</td><td>AGI/END</td></tr>
-                </tbody>
-            </table>
-
-            <h3>Generation 3 - Advanced Breeds</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Parents</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>AVI-3-01 through AVI-3-15</td><td><code>[PLACEHOLDER]</code></td><td>(Same pattern as other species)</td></tr>
-                </tbody>
-            </table>
-
-            <h2>2.7 Generation 4: Secret Cross-Species Hybrids</h2>
-            <p>These special monsters are created by breeding specific Gen 3 monsters from <strong>different species</strong>:</p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Parents</th>
-                        <th>Requirements</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>HYB-01</td><td><code>[PLACEHOLDER]</code></td><td>INS-3-?? + MAM-3-??</td><td><code>[PLACEHOLDER]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>HYB-02</td><td><code>[PLACEHOLDER]</code></td><td>INS-3-?? + REP-3-??</td><td><code>[PLACEHOLDER]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>HYB-03</td><td><code>[PLACEHOLDER]</code></td><td>INS-3-?? + AVI-3-??</td><td><code>[PLACEHOLDER]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>HYB-04</td><td><code>[PLACEHOLDER]</code></td><td>MAM-3-?? + REP-3-??</td><td><code>[PLACEHOLDER]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>HYB-05</td><td><code>[PLACEHOLDER]</code></td><td>MAM-3-?? + AVI-3-??</td><td><code>[PLACEHOLDER]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>HYB-06</td><td><code>[PLACEHOLDER]</code></td><td>REP-3-?? + AVI-3-??</td><td><code>[PLACEHOLDER]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                </tbody>
-            </table>
-
-            <div class="decision-needed">
-                <strong>Team Decision Needed:</strong> Which specific Gen 3 monsters unlock these hybrids?
+        <!-- MVP PRIORITIES -->
+        <div class="section" data-section="mvp">
+            <div class="section-header">
+                <h2>2. MVP Priorities</h2>
+                <span class="badge badge-confirmed">Confirmed</span>
             </div>
 
-            <h2>2.8 Base Stats</h2>
-            <p>Every monster has 4 core stats:</p>
-
             <table>
                 <thead>
-                    <tr>
-                        <th>Stat</th>
-                        <th>Abbreviation</th>
-                        <th>What It Affects</th>
-                    </tr>
+                    <tr><th>Priority</th><th>Feature</th><th>Status</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td><strong>Strength</strong></td><td>STR</td><td>HP, Physical Power</td></tr>
-                    <tr><td><strong>Intelligence</strong></td><td>INT</td><td>Special Power, Order Comprehension</td></tr>
-                    <tr><td><strong>Agility</strong></td><td>AGI</td><td>Movement Speed, Reaction Time</td></tr>
-                    <tr><td><strong>Endurance</strong></td><td>END</td><td>HP, Energy Regeneration</td></tr>
+                    <tr><td>1</td><td>Monster Breeding</td><td style="color:var(--accent-green)">MUST HAVE</td></tr>
+                    <tr><td>2</td><td>Monster Battling (Arena)</td><td style="color:var(--accent-green)">MUST HAVE</td></tr>
+                    <tr><td>3</td><td>Autonomous Monster AI</td><td style="color:var(--accent-green)">MUST HAVE</td></tr>
+                    <tr><td>4</td><td>World Exploration</td><td style="color:var(--accent-yellow)">Important</td></tr>
+                    <tr><td>5</td><td>Wild Monster Capture</td><td style="color:var(--accent-yellow)">Important</td></tr>
+                    <tr><td>—</td><td>Crafting / Food Creation</td><td style="color:var(--text-muted)">Can Cut</td></tr>
+                    <tr><td>—</td><td>Base Building</td><td style="color:var(--text-muted)">Can Cut</td></tr>
                 </tbody>
             </table>
 
-            <h3>Stat Range by Generation</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Generation</th>
-                        <th>Total Base Stats</th>
-                        <th>Typical Range Per Stat</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Gen 1</td><td><code>[EXAMPLE: 40]</code></td><td><code>[EXAMPLE: 7-14]</code></td></tr>
-                    <tr><td>Gen 2</td><td><code>[EXAMPLE: 44]</code></td><td><code>[EXAMPLE: 8-14]</code></td></tr>
-                    <tr><td>Gen 3</td><td><code>[EXAMPLE: 48]</code></td><td><code>[EXAMPLE: 9-15]</code></td></tr>
-                    <tr><td>Gen 4</td><td><code>[EXAMPLE: 56]</code></td><td><code>[EXAMPLE: 11-18]</code></td></tr>
-                </tbody>
-            </table>
+            <div class="feedback-box">
+                <label>Your thoughts on this section:</label>
+                <textarea placeholder="Approve, suggest changes, or mark for removal..."></textarea>
+                <div class="btn-row">
+                    <button class="btn-approve" onclick="markSection(this, 'approved')">✓ Approve</button>
+                    <button class="btn-revise" onclick="markSection(this, 'revise')">✎ Needs Revision</button>
+                    <button class="btn-scrap" onclick="markSection(this, 'scrap')">✕ Scrap</button>
+                </div>
+            </div>
+        </div>
 
-            <h3>How Stats Calculate Combat Values</h3>
-            <pre><code>COMBAT FORMULAS [EXAMPLE VALUES - ADJUST AS NEEDED]
-===================================================
-
-Max HP = (STR × 5) + (END × 8) + [EXAMPLE: 50]
-Physical Power = STR × [EXAMPLE: 2.5]
-Special Power = INT × [EXAMPLE: 2.5]
-Movement Speed = AGI × [EXAMPLE: 1.2]
-Reaction Time = AGI × [EXAMPLE: 0.8] (lower = faster response to orders)
-Energy Regen = END × [EXAMPLE: 0.5] per second
-Order Accuracy = INT × [EXAMPLE: 3]% + Temperament Bonus</code></pre>
-
-            <h2>2.9 Birthmarks System</h2>
-            <p>Every monster is born with <strong>random birthmarks</strong> that affect their personality and growth:</p>
-
-            <h3>Birthmark Types</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Birthmark</th>
-                        <th>Effect on Stats</th>
-                        <th>Effect on Temperament</th>
-                        <th>Rarity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td><code>[PLACEHOLDER: Mark 1]</code></td><td>+10% STR growth</td><td>Aggressive tendency</td><td><span class="badge badge-common">Common</span></td></tr>
-                    <tr><td><code>[PLACEHOLDER: Mark 2]</code></td><td>+10% INT growth</td><td>Calm tendency</td><td><span class="badge badge-common">Common</span></td></tr>
-                    <tr><td><code>[PLACEHOLDER: Mark 3]</code></td><td>+10% AGI growth</td><td>Nervous tendency</td><td><span class="badge badge-common">Common</span></td></tr>
-                    <tr><td><code>[PLACEHOLDER: Mark 4]</code></td><td>+10% END growth</td><td>Stubborn tendency</td><td><span class="badge badge-common">Common</span></td></tr>
-                    <tr><td><code>[PLACEHOLDER: Mark 5]</code></td><td>+5% all growth</td><td>Balanced</td><td><span class="badge badge-uncommon">Uncommon</span></td></tr>
-                    <tr><td><code>[PLACEHOLDER: Mark 6]</code></td><td>+15% STR, -5% INT</td><td>Very aggressive</td><td><span class="badge badge-rare">Rare</span></td></tr>
-                    <tr><td><code>[PLACEHOLDER: Mark 7]</code></td><td>+15% INT, -5% STR</td><td>Very calm</td><td><span class="badge badge-rare">Rare</span></td></tr>
-                    <tr><td><code>[PLACEHOLDER: Mark 8]</code></td><td><code>[PLACEHOLDER]</code></td><td><code>[PLACEHOLDER]</code></td><td><span class="badge badge-very-rare">Very Rare</span></td></tr>
-                </tbody>
-            </table>
-
-            <h3>Birthmark Rarity Rates</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rarity</th>
-                        <th>Chance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Common</td><td><code>[EXAMPLE: 60%]</code></td></tr>
-                    <tr><td>Uncommon</td><td><code>[EXAMPLE: 25%]</code></td></tr>
-                    <tr><td>Rare</td><td><code>[EXAMPLE: 12%]</code></td></tr>
-                    <tr><td>Very Rare</td><td><code>[EXAMPLE: 3%]</code></td></tr>
-                </tbody>
-            </table>
-
-            <h2>2.10 Temperament System</h2>
-            <p>Temperament affects how well monsters follow orders:</p>
-
-            <pre><code>TEMPERAMENT SCALE
-=================
-
-0 -------- 25 -------- 50 -------- 75 -------- 100
-Hostile   Unruly    Neutral    Loyal    Devoted
-
-< 25: Often ignores commands, acts on instinct
-25-50: Sometimes ignores commands
-50-75: Usually follows commands
-> 75: Reliably follows commands
-100: Perfect obedience + anticipates needs</code></pre>
-
-            <h3>Temperament Modifiers</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Action</th>
-                        <th>Effect</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Win battle</td><td><code>[EXAMPLE: +2]</code></td></tr>
-                    <tr><td>Lose battle</td><td><code>[EXAMPLE: -1]</code></td></tr>
-                    <tr><td>Feed favorite food</td><td><code>[EXAMPLE: +3]</code></td></tr>
-                    <tr><td>Feed disliked food</td><td><code>[EXAMPLE: -2]</code></td></tr>
-                    <tr><td>Rest at base</td><td><code>[EXAMPLE: +1]</code> per hour</td></tr>
-                    <tr><td>Faint in battle</td><td><code>[EXAMPLE: -5]</code></td></tr>
-                    <tr><td>Use in harsh conditions</td><td><code>[EXAMPLE: -1]</code></td></tr>
-                </tbody>
-            </table>
-
-            <h2>2.11 Attack Slots</h2>
-            <p>Each monster can equip <strong>8 attacks</strong> at a time:</p>
-
-            <pre><code>ATTACK SLOT LAYOUT
-==================
-
-Standard Attacks (Face Buttons):
-┌─────────────────────────────────────────┐
-│  Hold L1/R1 + Button = Command Attack   │
-├─────────────────────────────────────────┤
-│  [Y] Slot 1    [X] Slot 2               │
-│  [B] Slot 3    [A] Slot 4               │
-└─────────────────────────────────────────┘
-
-Advanced Attacks (L1+L2 or R1+R2 + Button):
-┌─────────────────────────────────────────┐
-│  Hold L1+L2/R1+R2 + Button = Special    │
-├─────────────────────────────────────────┤
-│  [Y] Slot 5    [X] Slot 6               │
-│  [B] Slot 7    [A] Slot 8               │
-└─────────────────────────────────────────┘</code></pre>
-
-            <h3>Attack Categories</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Description</th>
-                        <th>Energy Cost</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Basic</td><td>Simple physical attacks</td><td>Low</td></tr>
-                    <tr><td>Power</td><td>Heavy damage, slower</td><td>Medium</td></tr>
-                    <tr><td>Special</td><td>Uses INT for damage</td><td>Medium-High</td></tr>
-                    <tr><td>Support</td><td>Buffs self or ally</td><td>Medium</td></tr>
-                    <tr><td>Tactical</td><td>Positioning, debuffs</td><td>Varies</td></tr>
-                </tbody>
-            </table>
-        </section>
-
-        <hr>
-
-        <!-- SECTION 3: BREEDING SYSTEM -->
-        <section id="breeding-system" class="section">
-            <h1>3. BREEDING SYSTEM</h1>
-
-            <h2>3.1 Breeding Rules</h2>
-
-            <h3>Core Rules</h3>
-            <ol>
-                <li><strong>Same Generation Only</strong>: Monsters can only breed with others of the same generation</li>
-                <li><strong>Same Species Only</strong> (Except Gen 4): Gen 1-3 breeding stays within species</li>
-                <li><strong>Age Requirement</strong>: Monsters must reach <code>[EXAMPLE: Age 30 days]</code> before breeding eligibility</li>
-                <li><strong>Cooldown</strong>: After breeding, a monster cannot breed again for <code>[EXAMPLE: 7 days]</code></li>
-                <li><strong>Fusion Alternative</strong>: Instead of breeding, two monsters can fuse (both are consumed, offspring is stronger)</li>
-            </ol>
-
-            <h3>Breeding vs Fusion</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Aspect</th>
-                        <th>Breeding</th>
-                        <th>Fusion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Parents after</td><td>Both survive</td><td>Both consumed</td></tr>
-                    <tr><td>Offspring stats</td><td>Average of parents</td><td>Higher than average</td></tr>
-                    <tr><td>Offspring level</td><td>Starts at 1</td><td>Starts at <code>[EXAMPLE: 10]</code></td></tr>
-                    <tr><td>Inherited moves</td><td>Shared moves only</td><td>All moves from both</td></tr>
-                    <tr><td>Cooldown</td><td>Yes</td><td>N/A (parents gone)</td></tr>
-                </tbody>
-            </table>
-
-            <h2>3.2 Inheritance Formulas</h2>
-
-            <h3>Stat Inheritance</h3>
-            <pre><code>OFFSPRING STAT CALCULATION [EXAMPLE FORMULA]
-=============================================
-
-For each stat (STR, INT, AGI, END):
-
-Base = (Parent1_Stat + Parent2_Stat) / 2
-Variance = Random(-2, +2)
-Birthmark_Bonus = Apply birthmark modifier
-
-Final_Stat = Base + Variance + Birthmark_Bonus
-
-FUSION BONUS: Add +15% to Base before variance</code></pre>
-
-            <h3>Move Inheritance</h3>
-            <pre><code>MOVE INHERITANCE RULES
-======================
-
-1. List all moves Parent 1 knows
-2. List all moves Parent 2 knows
-3. Find moves that appear in BOTH lists AND offspring can learn
-4. Offspring starts with those shared learnable moves
-5. Remaining move slots are empty
-
-FUSION: Offspring inherits ALL moves from both parents that it can learn</code></pre>
-
-            <h2>3.3 Breeding Tree Diagrams</h2>
-
-            <h3>Option A: Hierarchical Tree (Per Species)</h3>
-            <pre><code>INSECT SPECIES BREEDING TREE
-============================
-
-                    GENERATION 1
-        ┌───────┬───────┬───────┬───────┐
-      INS-1A  INS-1B  INS-1C  INS-1D
-        │       │       │       │
-        └───┬───┘       └───┬───┘
-            │               │
-        ┌───┴───────────────┴───┐
-        │     GENERATION 2      │
-        ├───────────────────────┤
-        │ INS-2AB  INS-2AC      │
-        │ INS-2AD  INS-2BC      │
-        │ INS-2BD  INS-2CD      │
-        └───────────┬───────────┘
-                    │
-        ┌───────────┴───────────┐
-        │     GENERATION 3      │
-        │   (15 combinations)   │
-        │                       │
-        │ INS-3-01 ... INS-3-15 │
-        └───────────────────────┘</code></pre>
-
-            <h3>Option B: Matrix View (Gen 1 → Gen 2)</h3>
-            <pre><code>GENERATION 1 → 2 BREEDING MATRIX
-================================
-
-           INS-1A    INS-1B    INS-1C    INS-1D
-         ┌─────────┬─────────┬─────────┬─────────┐
-INS-1A   │    -    │ INS-2AB │ INS-2AC │ INS-2AD │
-         ├─────────┼─────────┼─────────┼─────────┤
-INS-1B   │ INS-2AB │    -    │ INS-2BC │ INS-2BD │
-         ├─────────┼─────────┼─────────┼─────────┤
-INS-1C   │ INS-2AC │ INS-2BC │    -    │ INS-2CD │
-         ├─────────┼─────────┼─────────┼─────────┤
-INS-1D   │ INS-2AD │ INS-2BD │ INS-2CD │    -    │
-         └─────────┴─────────┴─────────┴─────────┘</code></pre>
-
-            <h3>Option C: Linear Progression View</h3>
-            <pre><code>BREEDING PROGRESSION
-====================
-
-STEP 1: Acquire Gen 1 starters (A, B, C, D)
-        │
-        ▼
-STEP 2: Breed any two Gen 1 → Get Gen 2
-        A+B=2AB  A+C=2AC  A+D=2AD
-        B+C=2BC  B+D=2BD  C+D=2CD
-        │
-        ▼
-STEP 3: Breed any two Gen 2 → Get Gen 3
-        (15 possible combinations)
-        │
-        ▼
-STEP 4: [SECRET] Cross-species Gen 3 breeding → Gen 4 Hybrid</code></pre>
-
-            <h3>Option D: Full Visual Map</h3>
-            <pre><code>COMPLETE INSECT BREEDING MAP
-============================
-
-Gen 1:        [A]────[B]────[C]────[D]
-               │╲    ╱│╲    ╱│╲    ╱│
-               │ ╲  ╱ │ ╲  ╱ │ ╲  ╱ │
-               │  ╲╱  │  ╲╱  │  ╲╱  │
-               │  ╱╲  │  ╱╲  │  ╱╲  │
-               │ ╱  ╲ │ ╱  ╲ │ ╱  ╲ │
-               │╱    ╲│╱    ╲│╱    ╲│
-Gen 2:      [AB]───[AC]───[AD]
-              │╲    ╱│╲    ╱│
-            [BC]───[BD]───[CD]
-               ╲    ╱ ╲    ╱
-                ╲  ╱   ╲  ╱
-                 ╲╱     ╲╱
-Gen 3:    [3-01] [3-02] ... [3-15]
-                    │
-                    ▼
-Gen 4:    [HYBRID] (cross-species only)</code></pre>
-
-            <div class="decision-needed">
-                <strong>Team Decision:</strong> Which diagram style do you prefer? We can use one or combine styles.
+        <!-- MONSTERS -->
+        <div class="section" data-section="monsters">
+            <div class="section-header">
+                <h2>3. Monsters</h2>
+                <span class="badge badge-confirmed">Confirmed</span>
             </div>
 
-            <h2>3.4 Complete Breeding Combination Reference</h2>
+            <h3>Party Size</h3>
+            <div class="confirmed">2 monsters active at once. Switch control between them using R1/L1.</div>
 
-            <h3>Generation 2 Combinations (All Species)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Gen 2 ID</th>
-                        <th>Parent A</th>
-                        <th>Parent B</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>X-2AB</td><td>X-1A</td><td>X-1B</td></tr>
-                    <tr><td>X-2AC</td><td>X-1A</td><td>X-1C</td></tr>
-                    <tr><td>X-2AD</td><td>X-1A</td><td>X-1D</td></tr>
-                    <tr><td>X-2BC</td><td>X-1B</td><td>X-1C</td></tr>
-                    <tr><td>X-2BD</td><td>X-1B</td><td>X-1D</td></tr>
-                    <tr><td>X-2CD</td><td>X-1C</td><td>X-1D</td></tr>
-                </tbody>
-            </table>
-            <p><em>(Where X = INS, MAM, REP, or AVI)</em></p>
-
-            <h3>Generation 3 Combinations (All Species)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Gen 3 ID</th>
-                        <th>Parent A</th>
-                        <th>Parent B</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>X-3-01</td><td>X-2AB</td><td>X-2AC</td></tr>
-                    <tr><td>X-3-02</td><td>X-2AB</td><td>X-2AD</td></tr>
-                    <tr><td>X-3-03</td><td>X-2AB</td><td>X-2BC</td></tr>
-                    <tr><td>X-3-04</td><td>X-2AB</td><td>X-2BD</td></tr>
-                    <tr><td>X-3-05</td><td>X-2AB</td><td>X-2CD</td></tr>
-                    <tr><td>X-3-06</td><td>X-2AC</td><td>X-2AD</td></tr>
-                    <tr><td>X-3-07</td><td>X-2AC</td><td>X-2BC</td></tr>
-                    <tr><td>X-3-08</td><td>X-2AC</td><td>X-2BD</td></tr>
-                    <tr><td>X-3-09</td><td>X-2AC</td><td>X-2CD</td></tr>
-                    <tr><td>X-3-10</td><td>X-2AD</td><td>X-2BC</td></tr>
-                    <tr><td>X-3-11</td><td>X-2AD</td><td>X-2BD</td></tr>
-                    <tr><td>X-3-12</td><td>X-2AD</td><td>X-2CD</td></tr>
-                    <tr><td>X-3-13</td><td>X-2BC</td><td>X-2BD</td></tr>
-                    <tr><td>X-3-14</td><td>X-2BC</td><td>X-2CD</td></tr>
-                    <tr><td>X-3-15</td><td>X-2BD</td><td>X-2CD</td></tr>
-                </tbody>
-            </table>
-        </section>
-
-        <hr>
-
-        <!-- SECTION 4: COMBAT SYSTEM -->
-        <section id="combat-system" class="section">
-            <h1>4. COMBAT SYSTEM</h1>
-
-            <h2>4.1 Battle Overview</h2>
+            <h3>Acquisition</h3>
             <ul>
-                <li><strong>100% Real-time</strong> combat (not turn-based)</li>
-                <li>Player controls <strong>2 monsters</strong> simultaneously</li>
-                <li>Player gives <strong>orders</strong> but monsters have <strong>autonomy</strong> based on INT and Temperament</li>
-                <li>Battle formats: <strong>1v1, 1v2, 2v2</strong></li>
+                <li>Start with 1 monster</li>
+                <li>Subdue wild monsters (weaken → tranquilize → carry back to base)</li>
+                <li>Breeding/fusing monsters of the same species</li>
             </ul>
 
-            <h2>4.2 Controller Layout</h2>
+            <h3>Species (4 Total)</h3>
+            <table>
+                <thead><tr><th>Species</th><th>Region</th><th>Starter Types</th></tr></thead>
+                <tbody>
+                    <tr><td>Insect</td><td>Starting Area</td><td class="placeholder">[4 types - names TBD]</td></tr>
+                    <tr><td>Mammal</td><td>Region 2</td><td class="placeholder">[4 types - names TBD]</td></tr>
+                    <tr><td>Reptilian</td><td>Region 3</td><td class="placeholder">[4 types - names TBD]</td></tr>
+                    <tr><td>Avian</td><td>Region 4</td><td class="placeholder">[4 types - names TBD]</td></tr>
+                </tbody>
+            </table>
 
-            <h3>Option A: Detailed Controller Map</h3>
-            <pre><code>CONTROLLER LAYOUT - OPTION A
-============================
-
-              ┌─────────────────────────────────────┐
-              │           MONSTER BATTLER           │
-              │         CONTROLLER MAPPING          │
-              └─────────────────────────────────────┘
-
-    ┌─────────┐                               ┌─────────┐
-    │   L2    │  ← ITEMS MENU                 │   R2    │ ← ITEMS MENU
-    │   L1    │  ← COMMAND MONSTER 1          │   R1    │ ← COMMAND MONSTER 2
-    └─────────┘                               └─────────┘
-
-    ┌─────────┐                               ┌─────────┐
-    │         │                               │   [Y]   │ ← Attack Slot 1
-    │  D-PAD  │  ← STANCE CONTROL             │[X]   [B]│ ← Slots 2 & 3
-    │         │                               │   [A]   │ ← Attack Slot 4
-    └─────────┘                               └─────────┘
-
-                    D-PAD FUNCTIONS:
-                    ────────────────
-                         [↑]
-                     AGGRESSIVE
-                          │
-              [←] SUPPORT ─┼─ PASSIVE [→]
-                          │
-                     DEFENSIVE
-                         [↓]
-
-    COMBO INPUTS:
-    ─────────────
-    L1 + Face Button = Order Monster 1 to use attack
-    R1 + Face Button = Order Monster 2 to use attack
-    L1 + L2 + Face Button = Monster 1 special attack (slots 5-8)
-    R1 + R2 + Face Button = Monster 2 special attack (slots 5-8)
-    L2 only = Open items for Monster 1
-    R2 only = Open items for Monster 2</code></pre>
-
-            <h3>Option B: Simplified Quick Reference</h3>
-            <pre><code>CONTROLLER QUICK REFERENCE - OPTION B
-=====================================
-
-STANCES (D-Pad):
-  ↑ = Aggressive (all-out attack)
-  ↓ = Defensive (careful timing)
-  ← = Supportive (help ally)
-  → = Passive (avoid combat)
-
-MONSTER 1 (Left Side):
-  L1 + Y/X/B/A = Basic attacks 1-4
-  L1+L2 + Y/X/B/A = Special attacks 5-8
-  L2 = Items menu
-
-MONSTER 2 (Right Side):
-  R1 + Y/X/B/A = Basic attacks 1-4
-  R1+R2 + Y/X/B/A = Special attacks 5-8
-  R2 = Items menu</code></pre>
-
-            <h3>Option C: Visual Button Layout</h3>
-            <pre><code>BUTTON LAYOUT - OPTION C
-========================
-
-┌──────────────────────────────────────────────────────────┐
-│                                                          │
-│  [L2]─────────────[TRIGGERS]─────────────[R2]           │
-│   │                                        │             │
-│   └──► Items M1                  Items M2 ◄┘             │
-│                                                          │
-│  [L1]─────────────[BUMPERS]──────────────[R1]           │
-│   │                                        │             │
-│   └──► Command M1              Command M2 ◄┘             │
-│                                                          │
-│        ┌───┐                      ┌───┐                  │
-│        │ ↑ │                      │ Y │ Attack 1        │
-│      ┌─┴───┴─┐                  ┌─┴───┴─┐               │
-│      │←     →│ Stance          │X     B│ Atk 2 & 3     │
-│      └─┬───┬─┘                  └─┬───┬─┘               │
-│        │ ↓ │                      │ A │ Attack 4        │
-│        └───┘                      └───┘                  │
-│                                                          │
-└──────────────────────────────────────────────────────────┘</code></pre>
-
-            <div class="decision-needed">
-                <strong>Team Decision:</strong> Which controller layout style is clearest? Pick one for the final doc.
+            <h3>Generation System</h3>
+            <div class="confirmed">
+                <ul>
+                    <li><strong>Gen 1:</strong> 4 starter types per species (16 total)</li>
+                    <li><strong>Gen 2:</strong> Gen 1 + Gen 1 breeding (same species)</li>
+                    <li><strong>Gen 3:</strong> Gen 2 + Gen 2 breeding (same species) → 25 types per species</li>
+                    <li><strong>Gen 4:</strong> Secret cross-species hybrids (6+ unique monsters)</li>
+                </ul>
+                <p><strong>Total:</strong> ~100+ monster variants</p>
             </div>
 
-            <h2>4.3 Battle Flow</h2>
-
-            <h3>Option A: Step-by-Step Flow</h3>
-            <pre><code>BATTLE FLOW - STEP BY STEP
-==========================
-
-1. BATTLE START
-   ├── Camera zooms to battle arena
-   ├── Monsters take starting positions
-   └── "BATTLE START" notification
-
-2. REAL-TIME COMBAT LOOP
-   ├── Monsters act based on current STANCE
-   ├── Player can give ORDERS at any time
-   ├── Monsters respond based on INT + Temperament
-   ├── Attacks connect and deal damage
-   ├── Energy regenerates over time
-   └── Loop continues until victory condition
-
-3. VICTORY CONDITIONS
-   ├── All enemy monsters HP = 0 → WIN
-   ├── All player monsters HP = 0 → LOSE
-   └── Timer expires (arena only) → Judge decision
-
-4. BATTLE END
-   ├── XP awarded based on performance
-   ├── Stats increase based on actions taken
-   ├── Temperament adjusted
-   └── Return to field/arena</code></pre>
-
-            <h3>Option B: State Diagram</h3>
-            <pre><code>BATTLE STATE DIAGRAM
-====================
-
-    ┌─────────────┐
-    │ FIELD/ARENA │
-    └──────┬──────┘
-           │ Encounter
-           ▼
-    ┌─────────────┐
-    │ BATTLE INIT │──────┐
-    └──────┬──────┘      │
-           │             │ Flee (field only)
-           ▼             │
-    ┌─────────────┐      │
-┌──►│   COMBAT    │◄─────┤
-│   │    LOOP     │      │
-│   └──────┬──────┘      │
-│          │             │
-│   ┌──────┴──────┐      │
-│   │             │      │
-│   ▼             ▼      │
-│ ┌─────┐     ┌─────┐    │
-│ │ALIVE│     │FAINT│    │
-│ └──┬──┘     └──┬──┘    │
-│    │           │       │
-│    │     ┌─────┴─────┐ │
-└────┘     │           │ │
-           ▼           ▼ │
-      ┌────────┐  ┌────────┐
-      │VICTORY │  │ DEFEAT │
-      └────┬───┘  └────┬───┘
-           │           │
-           ▼           ▼
-      ┌────────────────────┐
-      │    BATTLE END      │
-      │  (XP, Stats, etc.) │
-      └────────────────────┘</code></pre>
-
-            <h3>Option C: Timeline View</h3>
-            <pre><code>BATTLE TIMELINE
-===============
-
-0:00 ─── BATTLE START ──────────────────────────────────────
-         │
-         ├─► Monsters spawn
-         ├─► Player can input immediately
-         │
-0:01 ─── COMBAT ACTIVE ─────────────────────────────────────
-         │
-         ├─► [Player: D-Pad ↑] → Both monsters go Aggressive
-         ├─► [Monster 1: Charges enemy]
-         ├─► [Player: L1+Y] → Order M1 to use Slot 1 attack
-         ├─► [Monster 1: Executes attack if INT check passes]
-         │
-0:05 ─── ENERGY MANAGEMENT ─────────────────────────────────
-         │
-         ├─► Energy depletes with attacks
-         ├─► Energy regenerates based on END stat
-         ├─► Low energy = slower/weaker attacks
-         │
-0:30 ─── BATTLE CONTINUES... ───────────────────────────────
-         │
-         └─► Until victory/defeat condition met</code></pre>
-
-            <div class="decision-needed">
-                <strong>Team Decision:</strong> Which battle flow visualization is most helpful?
-            </div>
-
-            <h2>4.4 Monster AI Behavior</h2>
-
-            <h3>Intelligence Effect on Orders</h3>
-            <pre><code>INTELLIGENCE THRESHOLDS
-=======================
-
-INT Range    │ Order Compliance
-─────────────┼──────────────────────────────
-0-5          │ Ignores most orders, acts on instinct
-6-10         │ Follows simple orders (Stance changes)
-11-15        │ Follows most orders, occasional mistakes
-16-20        │ Reliable order following
-21+          │ Perfect compliance + anticipates combos</code></pre>
-
-            <h3>Temperament Effect on Orders</h3>
-            <pre><code>TEMPERAMENT THRESHOLDS
-======================
-
-Temperament  │ Behavior
-─────────────┼──────────────────────────────
-0-24         │ Often defiant, may attack allies
-25-49        │ Unreliable, needs coaxing
-50-74        │ Generally obedient
-75-99        │ Loyal, rarely disobeys
-100          │ Perfect partner, synced with player</code></pre>
-
-            <h3>Combined Formula</h3>
-            <pre><code>ORDER SUCCESS CALCULATION
-=========================
-
-Base_Success = 50%
-INT_Bonus = INT × 2%
-Temp_Bonus = Temperament × 0.3%
-Stance_Match = +20% if order matches current stance
-
-Total = Base_Success + INT_Bonus + Temp_Bonus + Stance_Match
-
-Example:
-  Monster with INT 12, Temperament 60
-  Base: 50%
-  INT: +24%
-  Temp: +18%
-  Total: 92% success rate
-
-If failed: Monster does its own thing based on stance</code></pre>
-
-            <h3>AI Decision Tree</h3>
-            <pre><code>MONSTER AI DECISION TREE
-========================
-
-Every [EXAMPLE: 0.5 seconds], monster evaluates:
-
-                    ┌─────────────────┐
-                    │ Receive Order?  │
-                    └────────┬────────┘
-                             │
-              ┌──────────────┴──────────────┐
-              │                             │
-              ▼                             ▼
-         ┌────────┐                   ┌──────────┐
-         │  YES   │                   │    NO    │
-         └───┬────┘                   └────┬─────┘
-             │                              │
-             ▼                              ▼
-    ┌─────────────────┐            ┌─────────────────┐
-    │ Roll Success %  │            │ Check Stance    │
-    └────────┬────────┘            └────────┬────────┘
-             │                              │
-      ┌──────┴──────┐               ┌───────┴───────┐
-      │             │               │               │
-      ▼             ▼               ▼               ▼
-  ┌───────┐    ┌────────┐     ┌──────────┐   ┌──────────┐
-  │SUCCESS│    │ FAIL   │     │AGGRESSIVE│   │DEFENSIVE │
-  └───┬───┘    └───┬────┘     └────┬─────┘   └────┬─────┘
-      │            │               │              │
-      ▼            ▼               ▼              ▼
-  ┌────────┐  ┌─────────┐    ┌─────────┐    ┌─────────┐
-  │Execute │  │Own choice│   │Seek foe │    │Keep dist│
-  │ Order  │  │by stance │   │& attack │    │& counter│
-  └────────┘  └─────────┘    └─────────┘    └─────────┘</code></pre>
-
-            <h2>4.5 Battle Formats</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Format</th>
-                        <th>Player Monsters</th>
-                        <th>Enemy Monsters</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>1v1</td><td>1</td><td>1</td><td>Basic duels</td></tr>
-                    <tr><td>1v2</td><td>1</td><td>2</td><td>Disadvantage battles (high reward)</td></tr>
-                    <tr><td>2v1</td><td>2</td><td>1</td><td>Advantage battles (boss fights)</td></tr>
-                    <tr><td>2v2</td><td>2</td><td>2</td><td>Full team battles</td></tr>
-                </tbody>
-            </table>
-
-            <h3>Arena Divisions</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Division</th>
-                        <th>Format</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Singles</td><td>1v1</td><td>Pure skill, one monster</td></tr>
-                    <tr><td>Doubles</td><td>2v2</td><td>Team coordination</td></tr>
-                    <tr><td>Challenge</td><td>1v2</td><td>Prove your monster's worth</td></tr>
-                    <tr><td>Boss Rush</td><td>2v1</td><td>Defeat powerful enemies</td></tr>
-                </tbody>
-            </table>
-
-            <h2>4.6 Stat Effects in Combat</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Stat</th>
-                        <th>Combat Effect</th>
-                        <th>Example Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>STR</td><td>Physical attack damage</td><td><code>[EXAMPLE: damage = STR × 2.5]</code></td></tr>
-                    <tr><td>STR</td><td>HP contribution</td><td><code>[EXAMPLE: HP += STR × 5]</code></td></tr>
-                    <tr><td>INT</td><td>Special attack damage</td><td><code>[EXAMPLE: damage = INT × 2.5]</code></td></tr>
-                    <tr><td>INT</td><td>Order comprehension</td><td><code>[EXAMPLE: success% += INT × 2]</code></td></tr>
-                    <tr><td>AGI</td><td>Movement speed</td><td><code>[EXAMPLE: speed = AGI × 1.2]</code></td></tr>
-                    <tr><td>AGI</td><td>Attack speed</td><td><code>[EXAMPLE: cooldown reduced by AGI × 0.5%]</code></td></tr>
-                    <tr><td>AGI</td><td>Dodge chance</td><td><code>[EXAMPLE: dodge% = AGI × 1.5]</code></td></tr>
-                    <tr><td>END</td><td>HP contribution</td><td><code>[EXAMPLE: HP += END × 8]</code></td></tr>
-                    <tr><td>END</td><td>Energy regen</td><td><code>[EXAMPLE: energy/sec = END × 0.5]</code></td></tr>
-                    <tr><td>END</td><td>Status resist</td><td><code>[EXAMPLE: resist% = END × 2]</code></td></tr>
-                </tbody>
-            </table>
-
-            <h2>4.7 Actions That Raise Stats</h2>
-            <p>Stats improve through battle actions:</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Action</th>
-                        <th>Stat Raised</th>
-                        <th>Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Deal physical damage</td><td>STR</td><td><code>[EXAMPLE: +0.1 per hit]</code></td></tr>
-                    <tr><td>Use abilities</td><td>INT</td><td><code>[EXAMPLE: +0.1 per use]</code></td></tr>
-                    <tr><td>Move significant distance</td><td>AGI</td><td><code>[EXAMPLE: +0.1 per 100 units]</code></td></tr>
-                    <tr><td>Take damage</td><td>END</td><td><code>[EXAMPLE: +0.1 per 5% HP lost]</code></td></tr>
-                    <tr><td>Win battle</td><td>All</td><td><code>[EXAMPLE: +0.5 each]</code></td></tr>
-                    <tr><td>Faint</td><td>END</td><td><code>[EXAMPLE: +1.0]</code></td></tr>
-                </tbody>
-            </table>
-        </section>
-
-        <hr>
-
-        <!-- SECTION 5: WORLD & PROGRESSION -->
-        <section id="world-progression" class="section">
-            <h1>5. WORLD & PROGRESSION</h1>
-
-            <h2>5.1 Island Overview</h2>
-
-            <h3>Option A: Regional Map Layout</h3>
-            <pre><code>ISLAND MAP - OPTION A
-=====================
-
-                    ┌─────────────────┐
-                    │                 │
-                    │   REGION 4      │
-                    │   (Avian)       │
-                    │                 │
-                    └────────┬────────┘
-                             │
-         ┌───────────────────┴───────────────────┐
-         │                                       │
-    ┌────┴────┐                             ┌────┴────┐
-    │         │                             │         │
-    │ REGION 2│                             │ REGION 3│
-    │(Mammal) │                             │(Reptile)│
-    │         │                             │         │
-    └────┬────┘                             └────┬────┘
-         │                                       │
-         └───────────────────┬───────────────────┘
-                             │
-                    ┌────────┴────────┐
-                    │                 │
-                    │   REGION 1      │
-                    │   (Insect)      │
-                    │   [START]       │
-                    │                 │
-                    └─────────────────┘</code></pre>
-
-            <h3>Option B: Hub-and-Spoke Layout</h3>
-            <pre><code>ISLAND MAP - OPTION B
-=====================
-
-              AVIAN PEAKS
-                  ╱╲
-                 ╱  ╲
-                ╱    ╲
-               ╱      ╲
-     MAMMAL   ╱        ╲   REPTILE
-     FOREST──●──────────●──DESERT
-              ╲        ╱
-               ╲      ╱
-                ╲    ╱
-                 ╲  ╱
-                  ╲╱
-              INSECT
-              MEADOW
-             [START]
-
-● = City/Arena Location
-─ = Path between regions</code></pre>
-
-            <h3>Option C: Grid-Based Layout</h3>
-            <pre><code>ISLAND MAP - OPTION C (Screen Grid)
-===================================
-
-Each region = ~20 explorable screens
-
-     ┌───┬───┬───┬───┬───┐
-     │ A1│ A2│ A3│ A4│ A5│  REGION 4 - Avian
-     ├───┼───┼───┼───┼───┤  (Mountains/Sky)
-     │ A6│ A7│ A8│ A9│A10│
-     ├───┼───┼───┼───┼───┤
-     │ A11│A12│A13│A14│A15│
-     ├───┼───┼───┼───┼───┤
-     │ A16│A17│A18★│A19│A20│  ★ = City/Arena
-     └───┴───┴───┴───┴───┘
-           ↓
-     (Similar grid for each region)
-           ↓
-     ┌───┬───┬───┬───┬───┐
-     │ I1│ I2│ I3│ I4│ I5│  REGION 1 - Insect
-     ├───┼───┼───┼───┼───┤  (Starting Area)
-     │ I6│ I7│ I8★│ I9│I10│  ★ = Starting City
-     └───┴───┴───┴───┴───┘</code></pre>
-
-            <div class="decision-needed">
-                <strong>Team Decision:</strong> Which map layout style works best for your vision?
-            </div>
-
-            <h2>5.2 Region Details</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Region</th>
-                        <th>Species</th>
-                        <th>Theme</th>
-                        <th>Notable Areas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>1</td><td>Insect</td><td><code>[PLACEHOLDER: Forest/Meadow?]</code></td><td>Starting city, Player's base</td></tr>
-                    <tr><td>2</td><td>Mammal</td><td><code>[PLACEHOLDER: Plains/Caves?]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>3</td><td>Reptilian</td><td><code>[PLACEHOLDER: Desert/Swamp?]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>4</td><td>Avian</td><td><code>[PLACEHOLDER: Mountains/Sky?]</code></td><td>Grand Arena, Final challenges</td></tr>
-                </tbody>
-            </table>
-
-            <h3>Per Region Contents</h3>
-            <p>Each region contains:</p>
+            <h3>What Makes Each Monster Unique</h3>
             <ul>
-                <li><strong>1 City</strong> with Arena</li>
-                <li><strong>~20 explorable screens</strong> of wilderness</li>
-                <li><strong>2-3 caves/structures</strong> with rare monsters and items</li>
-                <li><strong>Wild monsters</strong> of that region's species (all generations)</li>
-                <li><strong>Resources</strong> for crafting/cooking (if implemented)</li>
+                <li><strong>Species</strong> — Base type and abilities</li>
+                <li><strong>Generation</strong> — Power tier and breeding potential</li>
+                <li><strong>Birthmarks</strong> — Random traits affecting temperament and stat growth</li>
             </ul>
 
-            <h2>5.3 Arena System</h2>
-
-            <h3>Rank Structure</h3>
-            <pre><code>ARENA RANK PROGRESSION
-======================
-
-Rank D ──► Rank C ──► Rank B ──► Rank A ──► Rank S
-  │          │          │          │          │
-  └──────────┴──────────┴──────────┴──────────┘
-                        │
-              Tournament Brackets
-              (Win matches to rank up)</code></pre>
-
-            <h3>Rank Requirements</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Wins Required</th>
-                        <th>Reward</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>D</td><td>Entry</td><td>Basic items</td></tr>
-                    <tr><td>C</td><td><code>[EXAMPLE: 3 wins]</code></td><td>Money + items</td></tr>
-                    <tr><td>B</td><td><code>[EXAMPLE: 5 wins]</code></td><td><strong>Unlock next region</strong></td></tr>
-                    <tr><td>A</td><td><code>[EXAMPLE: 8 wins]</code></td><td>Rare items</td></tr>
-                    <tr><td>S</td><td><code>[EXAMPLE: 10 wins + Champion]</code></td><td><strong>Skip a region</strong></td></tr>
-                </tbody>
-            </table>
-
-            <h3>Progression Path</h3>
-            <pre><code>GAME PROGRESSION
-================
-
-START: Region 1 (Insect)
-  │
-  ├─► Achieve Rank B in Arena 1
-  │   └──► Unlock Region 2 (Mammal)
-  │
-  ├─► [OR] Achieve Rank S in Arena 1
-  │   └──► Unlock Region 2 AND Region 3
-  │
-  └─► Continue until all 4 regions cleared
-
-GRAND CHAMPION:
-  └─► Defeat Rank S in all 4 Arenas
-      └──► Final challenge unlocked
-          └──► Become Grand Champion
-              └──► Post-game content available</code></pre>
-
-            <h3>Arena Rewards</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Reward Type</th>
-                        <th>Examples</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Money</td><td>Prize money based on rank</td></tr>
-                    <tr><td>Items</td><td>Healing items, buffs, equipment</td></tr>
-                    <tr><td>Ingredients</td><td>Cooking/crafting materials</td></tr>
-                    <tr><td>Access</td><td>New regions, secret areas</td></tr>
-                </tbody>
-            </table>
-
-            <h2>5.4 Wild Monster Capture</h2>
-
-            <h3>Capture Flow</h3>
-            <pre><code>CAPTURE PROCESS
-===============
-
-STEP 1: FIND
-  │
-  └─► Locate wild monster in wilderness
-      Monster types depend on region and rarity
-                │
-                ▼
-STEP 2: WEAKEN
-  │
-  └─► Battle the monster
-      Reduce HP to low (but not zero!)
-      DO NOT kill it
-                │
-                ▼
-STEP 3: TRANQUILIZE
-  │
-  └─► Use tranquilizer item
-      Success rate based on remaining HP
-      Lower HP = higher success
-                │
-                ▼
-STEP 4: TRANSPORT
-  │
-  └─► Carry unconscious monster back to base
-      Can only carry ONE at a time
-      If player faints, monster is lost
-      Rarer monsters = harder transport
-                │
-                ▼
-STEP 5: TAME
-  │
-  └─► Monster arrives at base
-      Starts with LOW temperament
-      Must build relationship over time</code></pre>
-
-            <h3>Capture Success Rates</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Monster HP</th>
-                        <th>Tranq Success</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>76-100%</td><td><code>[EXAMPLE: 5%]</code></td></tr>
-                    <tr><td>51-75%</td><td><code>[EXAMPLE: 15%]</code></td></tr>
-                    <tr><td>26-50%</td><td><code>[EXAMPLE: 40%]</code></td></tr>
-                    <tr><td>11-25%</td><td><code>[EXAMPLE: 70%]</code></td></tr>
-                    <tr><td>1-10%</td><td><code>[EXAMPLE: 90%]</code></td></tr>
-                </tbody>
-            </table>
-
-            <h3>Wild Monster Rarity by Region</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rarity</th>
-                        <th>Spawn Rate</th>
-                        <th>Generation</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Common</td><td><code>[EXAMPLE: 60%]</code></td><td>Gen 1</td></tr>
-                    <tr><td>Uncommon</td><td><code>[EXAMPLE: 25%]</code></td><td>Gen 1-2</td></tr>
-                    <tr><td>Rare</td><td><code>[EXAMPLE: 12%]</code></td><td>Gen 2</td></tr>
-                    <tr><td>Very Rare</td><td><code>[EXAMPLE: 3%]</code></td><td>Gen 2-3</td></tr>
-                </tbody>
-            </table>
-
-            <div class="note">
-                <strong>Note:</strong> Gen 3 and Gen 4 monsters are primarily obtained through breeding, not wild capture.
+            <div class="question">
+                <strong>Open Question:</strong> Does "Birthmarks" mean visual sprite changes, or just stat/personality variations?
             </div>
 
-            <h2>5.5 Monster Storage</h2>
+            <h3>Monster Lifespan/Death</h3>
+            <div class="tbd">TBD — Maybe injuries and potential death through combat?</div>
 
-            <h3>Base Capacity</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Upgrade Level</th>
-                        <th>Capacity</th>
-                        <th>Unlock Requirement</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Starting</td><td><code>[EXAMPLE: 6]</code></td><td>Default</td></tr>
-                    <tr><td>Upgrade 1</td><td><code>[EXAMPLE: 10]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>Upgrade 2</td><td><code>[EXAMPLE: 14]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>Upgrade 3</td><td><code>[EXAMPLE: 18]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                    <tr><td>Maximum</td><td><code>[EXAMPLE: 20]</code></td><td><code>[PLACEHOLDER]</code></td></tr>
-                </tbody>
-            </table>
-        </section>
+            <div class="feedback-box">
+                <label>Your thoughts on this section:</label>
+                <textarea placeholder="Approve, suggest changes, or mark for removal..."></textarea>
+                <div class="btn-row">
+                    <button class="btn-approve" onclick="markSection(this, 'approved')">✓ Approve</button>
+                    <button class="btn-revise" onclick="markSection(this, 'revise')">✎ Needs Revision</button>
+                    <button class="btn-scrap" onclick="markSection(this, 'scrap')">✕ Scrap</button>
+                </div>
+            </div>
+        </div>
 
-        <hr>
+        <!-- BREEDING -->
+        <div class="section" data-section="breeding">
+            <div class="section-header">
+                <h2>4. Breeding System</h2>
+                <span class="badge badge-confirmed">Confirmed</span>
+            </div>
 
-        <!-- SECTION 6: DATA ARCHITECTURE -->
-        <section id="data-architecture" class="section">
-            <h1>6. DATA ARCHITECTURE</h1>
+            <h3>Mechanic</h3>
+            <div class="confirmed">Fusion or breeding with a long cooldown before monsters can breed again.</div>
 
-            <blockquote>
-                <strong>Want more RPG Maker MZ specifics?</strong> Let the team know and we can expand this section with database organization, plugin hooks, and implementation details.
-            </blockquote>
+            <h3>Eligibility</h3>
+            <p>Monster must reach a certain age to be eligible for breeding/fusing.</p>
 
-            <h2>6.1 Monster Data Template</h2>
-            <p>Each monster instance stores:</p>
-
-            <pre><code>// MONSTER INSTANCE DATA STRUCTURE
-{
-  // Identity
-  "instanceId": "unique-id-here",
-  "speciesId": "INS-2AB",           // Which monster type
-  "nickname": "[PLACEHOLDER]",       // Player-given name
-
-  // Stats
-  "stats": {
-    "str": 12,                       // Current Strength
-    "int": 10,                       // Current Intelligence
-    "agi": 11,                       // Current Agility
-    "end": 9                         // Current Endurance
-  },
-
-  // Calculated values (derived from stats)
-  "derived": {
-    "maxHp": 132,                    // (STR × 5) + (END × 8) + 50
-    "currentHp": 132,
-    "maxEnergy": 100,
-    "currentEnergy": 100
-  },
-
-  // Personality
-  "birthmark": "MARK_03",            // Which birthmark
-  "temperament": 50,                 // 0-100 scale
-
-  // Progression
-  "age": 15,                         // Days since birth
-  "generation": 2,                   // 1, 2, 3, or 4
-  "parents": ["INS-1A-001", "INS-1B-002"], // Parent instance IDs
-
-  // Combat
-  "attackSlots": [
-    "SKILL_001", "SKILL_002", "SKILL_003", "SKILL_004",
-    "SKILL_008", "SKILL_012", null, null
-  ],
-  "learnedMoves": ["SKILL_001", "SKILL_002", ...],
-
-  // Status
-  "breedingCooldown": 0,             // Days until can breed
-  "isActive": true                   // In party or storage
-}</code></pre>
-
-            <h2>6.2 Species Definition Template</h2>
-            <p>Each monster species defines:</p>
-
-            <pre><code>// SPECIES DEFINITION (for monster types like "INS-2AB")
-{
-  "speciesId": "INS-2AB",
-  "displayName": "[PLACEHOLDER]",
-  "species": "INSECT",
-  "generation": 2,
-
-  // Visual
-  "spriteSheet": "monsters/ins_2ab.png",
-  "portraitImage": "faces/ins_2ab.png",
-  "battleSprite": "sv_monsters/ins_2ab.png",
-
-  // Base Stats (before birthmark/level)
-  "baseStats": {
-    "str": 11,
-    "int": 11,
-    "agi": 10,
-    "end": 10
-  },
-
-  // Growth rates (stat gain per level/action)
-  "growthRates": {
-    "str": 1.2,
-    "int": 1.2,
-    "agi": 1.0,
-    "end": 1.0
-  },
-
-  // Breeding
-  "parents": ["INS-1A", "INS-1B"],   // Required parents
-  "canBreedWith": ["INS-2AC", "INS-2AD", "INS-2BC", "INS-2BD", "INS-2CD"],
-
-  // Learnable moves
-  "learnableMoves": [
-    { "skill": "SKILL_001", "requirement": "default" },
-    { "skill": "SKILL_005", "requirement": "str >= 15" },
-    { "skill": "SKILL_010", "requirement": "age >= 30" }
-  ],
-
-  // Description
-  "description": "[PLACEHOLDER: Monster lore/description]"
-}</code></pre>
-
-            <h2>6.3 Breeding Data Template</h2>
-            <pre><code>// BREEDING COMBINATION DATA
-{
-  "breedingCombinations": [
-    {
-      "parent1": "INS-1A",
-      "parent2": "INS-1B",
-      "result": "INS-2AB",
-      "requirements": {
-        "minAge": 30,
-        "sameGeneration": true,
-        "sameSpecies": true
-      }
-    },
-    // ... all 100+ combinations
-  ],
-
-  "crossSpeciesBreeding": [
-    {
-      "parent1Species": "INSECT",
-      "parent1Generation": 3,
-      "parent1Specific": "INS-3-05",  // or null for any Gen 3
-      "parent2Species": "MAMMAL",
-      "parent2Generation": 3,
-      "parent2Specific": "MAM-3-05",
-      "result": "HYB-01",
-      "requirements": {
-        "specialCondition": "[PLACEHOLDER]"
-      }
-    }
-  ]
-}</code></pre>
-
-            <h2>6.4 Save Data Considerations</h2>
-            <p>What needs to persist per save file:</p>
-
-            <pre><code>// SAVE FILE STRUCTURE
-{
-  "player": {
-    "name": "Player Name",
-    "position": { "mapId": 5, "x": 10, "y": 15 },
-    "money": 5000,
-    "inventory": [...],
-    "playTime": 36000  // seconds
-  },
-
-  "monsters": [
-    // Array of all owned monster instances
-    // Using structure from 6.1
-  ],
-
-  "activeParty": ["instance-id-1", "instance-id-2"],
-
-  "progression": {
-    "arenaRanks": {
-      "region1": "B",
-      "region2": "D",
-      "region3": null,
-      "region4": null
-    },
-    "unlockedRegions": [1, 2],
-    "baseUpgradeLevel": 1,
-    "storiesCompleted": [...]
-  },
-
-  "breedingHistory": [
-    // Track what's been bred for achievements/unlocks
-  ]
-}</code></pre>
-        </section>
-
-        <hr>
-
-        <!-- SECTION 7: TEAM DECISION CHECKLIST -->
-        <section id="team-decision-checklist" class="section">
-            <h1>7. TEAM DECISION CHECKLIST</h1>
-            <p>Use this section to track decisions that need to be made:</p>
-
-            <h2>Monster Names</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Decided Name</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>INS-1A</td><td><code>[ ]</code></td><td></td></tr>
-                    <tr><td>INS-1B</td><td><code>[ ]</code></td><td></td></tr>
-                    <tr><td>INS-1C</td><td><code>[ ]</code></td><td></td></tr>
-                    <tr><td>INS-1D</td><td><code>[ ]</code></td><td></td></tr>
-                    <tr><td>...</td><td>...</td><td></td></tr>
-                </tbody>
-            </table>
-
-            <h2>Stat Values</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Parameter</th>
-                        <th>Current Example</th>
-                        <th>Team Decision</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Gen 1 total stats</td><td>40</td><td><code>[ ]</code></td></tr>
-                    <tr><td>Gen 2 total stats</td><td>44</td><td><code>[ ]</code></td></tr>
-                    <tr><td>Gen 3 total stats</td><td>48</td><td><code>[ ]</code></td></tr>
-                    <tr><td>Gen 4 total stats</td><td>56</td><td><code>[ ]</code></td></tr>
-                    <tr><td>Base HP formula</td><td>(STR×5)+(END×8)+50</td><td><code>[ ]</code></td></tr>
-                    <tr><td>Breeding cooldown</td><td>7 days</td><td><code>[ ]</code></td></tr>
-                    <tr><td>Breeding min age</td><td>30 days</td><td><code>[ ]</code></td></tr>
-                </tbody>
-            </table>
-
-            <h2>Diagram Preferences</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Diagram Type</th>
-                        <th>Options</th>
-                        <th>Team Choice</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Breeding Tree</td><td>A / B / C / D</td><td><code>[ ]</code></td></tr>
-                    <tr><td>Controller Layout</td><td>A / B / C</td><td><code>[ ]</code></td></tr>
-                    <tr><td>Battle Flow</td><td>A / B / C</td><td><code>[ ]</code></td></tr>
-                    <tr><td>Island Map</td><td>A / B / C</td><td><code>[ ]</code></td></tr>
-                </tbody>
-            </table>
-
-            <h2>Features to Discuss</h2>
-            <ul class="checklist">
-                <li>Lifespan/death system for monsters?</li>
-                <li>Day/night cycle?</li>
-                <li>Seasonal changes?</li>
-                <li>Which Gen 3 monsters unlock Gen 4 hybrids?</li>
-                <li>Base building details (if included)?</li>
-                <li>Crafting system details (if included)?</li>
-                <li>Multiplayer functionality?</li>
+            <h3>Inheritance</h3>
+            <ul>
+                <li>Stats depend on parents using a formula</li>
+                <li>If parents know moves the child can learn, it keeps them</li>
             </ul>
-        </section>
 
-        <hr>
+            <div class="question">
+                <strong>Open Question:</strong> What's the inheritance formula?<br>
+                <em>Example: <code>(ParentA + ParentB) / 2 * RandomModifier</code> ?</em>
+            </div>
 
-        <!-- NEXT STEPS -->
-        <section class="section">
-            <h1>NEXT STEPS</h1>
-            <ol>
-                <li><strong>Team reviews this document together</strong></li>
-                <li><strong>Fill in placeholders</strong> for monster names, descriptions</li>
-                <li><strong>Decide on example values</strong> for stats, formulas</li>
-                <li><strong>Choose preferred diagrams</strong> for breeding, combat, map</li>
-                <li><strong>Return decisions</strong> to update the master document</li>
-                <li><strong>Begin implementation</strong> based on finalized blueprint</li>
-            </ol>
-        </section>
+            <h3>Breeding Rules</h3>
+            <ul>
+                <li>Gen 1 + Gen 1 (same species) → Gen 2</li>
+                <li>Gen 2 + Gen 2 (same species only) → Gen 3</li>
+                <li>Certain Gen 3 + Gen 3 (cross-species) → Gen 4 (secret)</li>
+            </ul>
 
-        <hr>
+            <div class="feedback-box">
+                <label>Your thoughts on this section:</label>
+                <textarea placeholder="Approve, suggest changes, or mark for removal..."></textarea>
+                <div class="btn-row">
+                    <button class="btn-approve" onclick="markSection(this, 'approved')">✓ Approve</button>
+                    <button class="btn-revise" onclick="markSection(this, 'revise')">✎ Needs Revision</button>
+                    <button class="btn-scrap" onclick="markSection(this, 'scrap')">✕ Scrap</button>
+                </div>
+            </div>
+        </div>
 
-        <footer style="text-align: center; color: var(--text-muted); padding: 2rem 0;">
-            <p><em>Document generated for Monster Battler team review.</em></p>
-            <p><em>All <code>[PLACEHOLDER]</code> and <code>[EXAMPLE]</code> values are meant to be customized by the team.</em></p>
-        </footer>
+        <!-- COMBAT -->
+        <div class="section" data-section="combat">
+            <div class="section-header">
+                <h2>5. Combat System</h2>
+                <span class="badge badge-confirmed">Confirmed</span>
+            </div>
+
+            <h3>Battle Pacing</h3>
+            <div class="confirmed"><strong>100% Real-time</strong></div>
+
+            <h3>Battle Formats</h3>
+            <ul>
+                <li>1v1 (Arena & Field)</li>
+                <li>1v2 (Arena & Field)</li>
+                <li>2v2 (Arena & Field)</li>
+            </ul>
+
+            <h3>Monster Autonomy</h3>
+            <div class="confirmed">
+                Monsters control themselves based on:
+                <ul>
+                    <li><strong>Intelligence:</strong> Lower INT = poor command comprehension</li>
+                    <li><strong>Temperament:</strong> Lower TEMP = ignores commands (lack of training)</li>
+                </ul>
+                Treating monsters right increases temperament.
+            </div>
+
+            <h3>Player Commands</h3>
+            <table>
+                <thead><tr><th>Input</th><th>Action</th></tr></thead>
+                <tbody>
+                    <tr><td>D-Pad</td><td>Stance: Aggressive / Defensive / Supportive / Passive</td></tr>
+                    <tr><td>L1 / R1</td><td>Switch control between Monster 1 / Monster 2</td></tr>
+                    <tr><td>L1 + A/B/X/Y</td><td>Order Monster 1 to use Attack 1-4</td></tr>
+                    <tr><td>R1 + A/B/X/Y</td><td>Order Monster 2 to use Attack 1-4</td></tr>
+                    <tr><td>L1+L2 + A/B/X/Y</td><td>Monster 1 Attacks 5-8 (or combo)</td></tr>
+                    <tr><td>R1+R2 + A/B/X/Y</td><td>Monster 2 Attacks 5-8 (or combo)</td></tr>
+                    <tr><td>L2 / R2</td><td>Use items</td></tr>
+                </tbody>
+            </table>
+
+            <div class="question">
+                <strong>Open Question:</strong> How does this translate to Keyboard/Mouse?
+            </div>
+
+            <h3>Tactics</h3>
+            <ul>
+                <li>Pincer attack</li>
+                <li>Attack separate monsters</li>
+                <li>Attack same monster</li>
+                <li>Special combo attack (L1+L2 / R1+R2)</li>
+            </ul>
+
+            <h3>Stats & Combat Effects</h3>
+            <table>
+                <thead><tr><th>Stat</th><th>Raised By</th><th>Affects</th></tr></thead>
+                <tbody>
+                    <tr><td>Strength (STR)</td><td>Attacking</td><td>HP, Power</td></tr>
+                    <tr><td>Intelligence (INT)</td><td>Using abilities</td><td>Special Power, Command obedience</td></tr>
+                    <tr><td>Agility (AGI)</td><td>Moving around</td><td>Movement speed, Reaction time</td></tr>
+                    <tr><td>Endurance (END)</td><td>Getting hit</td><td>HP, Energy regen rate</td></tr>
+                </tbody>
+            </table>
+
+            <div class="tbd">Note: Stat effects need to be fleshed out more.</div>
+
+            <h3>Attack Slots</h3>
+            <div class="confirmed">Each monster has 8 equippable attacks.</div>
+
+            <div class="question">
+                <strong>Open Question:</strong> Is the player physically present on battlefield (can be hit), or just commanding from sidelines?
+            </div>
+
+            <div class="feedback-box">
+                <label>Your thoughts on this section:</label>
+                <textarea placeholder="Approve, suggest changes, or mark for removal..."></textarea>
+                <div class="btn-row">
+                    <button class="btn-approve" onclick="markSection(this, 'approved')">✓ Approve</button>
+                    <button class="btn-revise" onclick="markSection(this, 'revise')">✎ Needs Revision</button>
+                    <button class="btn-scrap" onclick="markSection(this, 'scrap')">✕ Scrap</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- WORLD -->
+        <div class="section" data-section="world">
+            <div class="section-header">
+                <h2>6. World & Exploration</h2>
+                <span class="badge badge-confirmed">Confirmed</span>
+            </div>
+
+            <h3>Setting</h3>
+            <div class="confirmed">Island with 4 regions, each themed around a species.</div>
+
+            <h3>Structure</h3>
+            <ul>
+                <li>4 cities (one per region)</li>
+                <li>~20 screens of wilderness per region</li>
+                <li>Enterable areas: caves, structures</li>
+                <li>Progress by ranking up in arena to unlock next region</li>
+            </ul>
+
+            <div class="question">
+                <strong>Open Question:</strong> Seamless open world or distinct map loads between screens?
+            </div>
+
+            <h3>Wilderness Content</h3>
+            <ul>
+                <li>Wild monsters to fight and capture</li>
+                <li>Items: heals, power-ups</li>
+                <li>Food ingredients for cooking</li>
+                <li>Caves/structures with rare items and boss monsters</li>
+            </ul>
+
+            <h3>Wild Monster Capture</h3>
+            <div class="confirmed">
+                <ol>
+                    <li>Weaken the monster</li>
+                    <li>Tranquilize it</li>
+                    <li>Carry it back to base (can only carry 1)</li>
+                    <li>If you die on the way back, you lose it</li>
+                </ol>
+                Rarer monsters = harder to return with.
+            </div>
+
+            <h3>Day/Night & Seasons</h3>
+            <div class="tbd">TBD — If any, probably won't affect spawns or behaviors.</div>
+
+            <div class="feedback-box">
+                <label>Your thoughts on this section:</label>
+                <textarea placeholder="Approve, suggest changes, or mark for removal..."></textarea>
+                <div class="btn-row">
+                    <button class="btn-approve" onclick="markSection(this, 'approved')">✓ Approve</button>
+                    <button class="btn-revise" onclick="markSection(this, 'revise')">✎ Needs Revision</button>
+                    <button class="btn-scrap" onclick="markSection(this, 'scrap')">✕ Scrap</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARENA -->
+        <div class="section" data-section="arena">
+            <div class="section-header">
+                <h2>7. Arena System</h2>
+                <span class="badge badge-confirmed">Confirmed</span>
+            </div>
+
+            <h3>Structure</h3>
+            <ul>
+                <li>Tournament brackets determine rank within an arena</li>
+                <li>Ladder determines overall placement</li>
+                <li>Ranks: D → C → B → A → S</li>
+            </ul>
+
+            <h3>Progression</h3>
+            <div class="confirmed">
+                Achieving certain rank unlocks path to next area.<br>
+                <em>Example: Rank B in Arena 1 → Access to Arena 2. Rank S in Arena 1 → Skip to Arena 3.</em>
+            </div>
+            <div class="tbd">Exact rank requirements TBD.</div>
+
+            <h3>Rewards</h3>
+            <ul>
+                <li>Money</li>
+                <li>Items and ingredients</li>
+                <li>Foods</li>
+                <li>Access to new areas</li>
+            </ul>
+
+            <h3>Weight Classes</h3>
+            <div class="confirmed">None. Bring your godlike Gen 4 to D-rank if you want.</div>
+
+            <h3>Goal</h3>
+            <div class="confirmed">Become champion of all arenas. Game continues after completion.</div>
+
+            <div class="feedback-box">
+                <label>Your thoughts on this section:</label>
+                <textarea placeholder="Approve, suggest changes, or mark for removal..."></textarea>
+                <div class="btn-row">
+                    <button class="btn-approve" onclick="markSection(this, 'approved')">✓ Approve</button>
+                    <button class="btn-revise" onclick="markSection(this, 'revise')">✎ Needs Revision</button>
+                    <button class="btn-scrap" onclick="markSection(this, 'scrap')">✕ Scrap</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PLAYER ROLE -->
+        <div class="section" data-section="player">
+            <div class="section-header">
+                <h2>8. Player Role</h2>
+                <span class="badge badge-confirmed">Confirmed</span>
+            </div>
+
+            <h3>Avatar</h3>
+            <div class="confirmed">Player has a sprite similar to monsters. Monsters follow along.</div>
+
+            <h3>Outside Battle</h3>
+            <ul>
+                <li>Explore with monsters</li>
+                <li>Find areas with loot and fights</li>
+                <li>Cook foods to enhance monster growth rates</li>
+                <li>Item crafting (maybe)</li>
+            </ul>
+
+            <h3>Items in Battle</h3>
+            <ul>
+                <li>Use items on either monster for heals/buffs</li>
+                <li>Maybe damaging/debuffing items for enemies</li>
+            </ul>
+
+            <div class="feedback-box">
+                <label>Your thoughts on this section:</label>
+                <textarea placeholder="Approve, suggest changes, or mark for removal..."></textarea>
+                <div class="btn-row">
+                    <button class="btn-approve" onclick="markSection(this, 'approved')">✓ Approve</button>
+                    <button class="btn-revise" onclick="markSection(this, 'revise')">✎ Needs Revision</button>
+                    <button class="btn-scrap" onclick="markSection(this, 'scrap')">✕ Scrap</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPTIONAL FEATURES -->
+        <div class="section" data-section="optional">
+            <div class="section-header">
+                <h2>9. Optional Features (Ideas)</h2>
+                <span class="badge badge-tbd">TBD</span>
+            </div>
+
+            <h3>Base Building</h3>
+            <div class="tbd">
+                Buildable/expandable base that increases monster comfort/happiness and enhances growth.<br>
+                NPCs can move in for shops, etc.
+            </div>
+
+            <h3>Multiplayer</h3>
+            <div class="tbd">Perhaps multiplayer to fight friends or strangers. Out of scope for V1?</div>
+
+            <h3>Crafting System</h3>
+            <div class="tbd">Item crafting for battle consumables. Can be cut if needed.</div>
+
+            <div class="feedback-box">
+                <label>Your thoughts on this section:</label>
+                <textarea placeholder="Approve, suggest changes, or mark for removal..."></textarea>
+                <div class="btn-row">
+                    <button class="btn-approve" onclick="markSection(this, 'approved')">✓ Approve</button>
+                    <button class="btn-revise" onclick="markSection(this, 'revise')">✎ Needs Revision</button>
+                    <button class="btn-scrap" onclick="markSection(this, 'scrap')">✕ Scrap</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPEN QUESTIONS -->
+        <div class="section" data-section="questions">
+            <div class="section-header">
+                <h2>10. Open Questions</h2>
+                <span class="badge badge-question">Needs Answers</span>
+            </div>
+
+            <h3>Technical Foundation</h3>
+            <div class="question">
+                <strong>Engine:</strong> RPG Maker MZ/MV, or custom engine (Godot/Unity)?<br>
+                <em>Context: Real-time AI combat is complex for standard RPG Maker.</em>
+            </div>
+
+            <div class="question">
+                <strong>Platform:</strong> PC with controller? Console? Mobile?
+            </div>
+
+            <h3>Combat Details</h3>
+            <div class="question">
+                <strong>AI System:</strong> Behavior Trees or State Machines for monster AI?
+            </div>
+
+            <div class="question">
+                <strong>Intelligence Effect:</strong> Probability of ignoring commands, or lower accuracy?
+            </div>
+
+            <h3>Data Structure</h3>
+            <div class="question">
+                <strong>Monster Database:</strong> JSON/external format, or hardcoded in engine?
+            </div>
+
+            <div class="feedback-box">
+                <label>Your thoughts on this section:</label>
+                <textarea placeholder="Approve, suggest changes, or mark for removal..."></textarea>
+                <div class="btn-row">
+                    <button class="btn-approve" onclick="markSection(this, 'approved')">✓ Approve</button>
+                    <button class="btn-revise" onclick="markSection(this, 'revise')">✎ Needs Revision</button>
+                    <button class="btn-scrap" onclick="markSection(this, 'scrap')">✕ Scrap</button>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <div class="actions">
+        <button class="btn-clear" onclick="clearAll()">Clear All</button>
+        <button class="btn-export" onclick="exportFeedback()">Export Feedback</button>
+    </div>
+
+    <script>
+        function markSection(btn, status) {
+            const section = btn.closest('.section');
+            section.querySelectorAll('.btn-row button').forEach(b => b.style.opacity = '0.5');
+            btn.style.opacity = '1';
+            section.dataset.status = status;
+        }
+
+        function exportFeedback() {
+            let output = "MONSTER BATTLER BLUEPRINT - FEEDBACK\n";
+            output += "=====================================\n";
+            output += "Exported: " + new Date().toLocaleString() + "\n\n";
+
+            document.querySelectorAll('.section').forEach(section => {
+                const title = section.querySelector('h2').textContent;
+                const status = section.dataset.status || 'no response';
+                const textarea = section.querySelector('textarea');
+                const feedback = textarea ? textarea.value.trim() : '';
+
+                output += `## ${title}\n`;
+                output += `Status: ${status.toUpperCase()}\n`;
+                if (feedback) {
+                    output += `Feedback: ${feedback}\n`;
+                }
+                output += "\n";
+            });
+
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'blueprint_feedback.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function clearAll() {
+            if (confirm('Clear all feedback?')) {
+                document.querySelectorAll('textarea').forEach(t => t.value = '');
+                document.querySelectorAll('.section').forEach(s => {
+                    delete s.dataset.status;
+                    s.querySelectorAll('.btn-row button').forEach(b => b.style.opacity = '1');
+                });
+            }
+        }
+    </script>
 </body>
 </html>
