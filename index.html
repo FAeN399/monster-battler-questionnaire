@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Monster Battler - Deep Dive Questionnaire</title>
+  <title>Monster Battler - Framework Questions</title>
   <style>
     * {
       margin: 0;
@@ -52,15 +52,6 @@
       color: #A1A1AA;
     }
 
-    .intro ul {
-      margin-top: 12px;
-      margin-left: 20px;
-    }
-
-    .intro li {
-      margin-bottom: 4px;
-    }
-
     section {
       background: #18181B;
       border: 1px solid #27272A;
@@ -76,21 +67,6 @@
       margin-bottom: 24px;
       padding-bottom: 12px;
       border-bottom: 2px solid #2DD4BF30;
-    }
-
-    .context {
-      background: #14231F;
-      border-left: 3px solid #2DD4BF;
-      padding: 12px 16px;
-      margin-bottom: 24px;
-      font-size: 14px;
-      color: #5EEAD4;
-    }
-
-    .context strong {
-      display: block;
-      margin-bottom: 4px;
-      color: #2DD4BF;
     }
 
     .form-group {
@@ -195,516 +171,104 @@
 <body>
   <div class="container">
     <header>
-      <h1>Monster Battler - Deep Dive</h1>
-      <p class="subtitle">Follow-up Questionnaire v2</p>
+      <h1>Monster Battler - Framework</h1>
+      <p class="subtitle">Follow-up Questions v2</p>
     </header>
 
     <div class="intro">
-      <p>Based on your initial answers, this questionnaire digs deeper into the mechanics. We know:</p>
-      <ul>
-        <li>2 monsters in battle, real-time combat, L1/R1 controls</li>
-        <li>4 species × 4 starters × 3 generations = 100+ monsters</li>
-        <li>Autonomy based on intelligence + temperament</li>
-        <li>Island world with 4 cities and arenas (D-S ranks)</li>
-        <li>Capture wild monsters, breed/fuse for better ones</li>
-      </ul>
+      <p>Big-picture questions to solidify the foundation before diving into specifics.</p>
     </div>
 
     <form id="designForm">
 
-      <!-- COMBAT MECHANICS -->
       <section>
-        <h2>Combat Mechanics - The Details</h2>
+        <h2>Core Fantasy</h2>
 
-        <div class="context">
-          <strong>What you said:</strong>
-          Real-time combat. Monsters can disobey based on INT (understanding) and temperament (training). D-pad for stances, face buttons for 8 attacks per monster, L1/R1 to select monster.
+        <div class="form-group">
+          <label for="playerFantasy">What's the player fantasy?</label>
+          <p class="hint">Monster trainer? Beast tamer? Arena champion? Breeder/geneticist? Explorer?</p>
+          <textarea id="playerFantasy" name="playerFantasy"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="disobedience">What happens when a monster disobeys an order?</label>
-          <p class="hint">Does it ignore you and pick its own action? Delay before acting? Do a worse version? How visible is this to the player?</p>
-          <textarea id="disobedience" name="disobedience"></textarea>
+          <label for="uniqueHook">What makes this different from Pokemon/Digimon/Monster Rancher?</label>
+          <p class="hint">The one thing you'd put on the back of the box.</p>
+          <textarea id="uniqueHook" name="uniqueHook"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="disobedienceRate">How often would an untrained monster disobey?</label>
-          <p class="hint">20% of the time? 50%? 80%? Does it scale with specific actions (simple vs complex)?</p>
-          <textarea id="disobedienceRate" name="disobedienceRate"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="autonomousBehavior">When you DON'T give orders, what does the monster do?</label>
-          <p class="hint">Stand idle? Auto-attack based on stance? Defend itself? How smart are its autonomous decisions?</p>
-          <textarea id="autonomousBehavior" name="autonomousBehavior"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="energySystem">Is there an energy/stamina/mana system for attacks?</label>
-          <p class="hint">Can monsters spam their best moves forever? Cooldowns per move? Shared energy pool? Regenerating stamina?</p>
-          <textarea id="energySystem" name="energySystem"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="targeting">How does targeting work in 2v2 battles?</label>
-          <p class="hint">Auto-target nearest? Player chooses target? Monsters pick their own targets? Lock-on system?</p>
-          <textarea id="targeting" name="targeting"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="positioning">How important is positioning and movement?</label>
-          <p class="hint">Is the arena open with dodging/flanking? Or more like standing positions with attack animations? Can monsters get cornered?</p>
-          <textarea id="positioning" name="positioning"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="knockoutMechanic">What happens when a monster's HP hits zero?</label>
-          <p class="hint">Instant KO? Downed state with revive window? Retreat from battle? Death risk?</p>
-          <textarea id="knockoutMechanic" name="knockoutMechanic"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="comboAttacks">How do the L1+L2 / R1+R2 combo attacks work?</label>
-          <p class="hint">Both monsters attack together? Special fusion moves? Costs extra resources? Setup requirements?</p>
-          <textarea id="comboAttacks" name="comboAttacks"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="battleLength">How long should an average arena battle last?</label>
-          <p class="hint">30 seconds of intensity? 2-3 minutes of strategy? 5+ minute wars of attrition?</p>
-          <textarea id="battleLength" name="battleLength"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="combatOther">Other thoughts on combat mechanics?</label>
-          <textarea id="combatOther" name="combatOther"></textarea>
+          <label for="coreMoment">What's the "hell yeah" moment you want players to experience?</label>
+          <p class="hint">First arena win? Breeding a powerful hybrid? Perfectly-timed combo?</p>
+          <textarea id="coreMoment" name="coreMoment"></textarea>
         </div>
       </section>
 
-      <!-- STATS & GROWTH -->
       <section>
-        <h2>Stats & Growth System</h2>
+        <h2>Combat Feel</h2>
 
-        <div class="context">
-          <strong>What you said:</strong>
-          Stats grow through battle actions (attacking → STR, abilities → INT, moving → AGI, getting hit → END). Birthmarks affect temperament and stat growth randomly.
+        <div class="form-group">
+          <label for="combatReference">What existing game's combat feels closest to what you want?</label>
+          <p class="hint">Digimon World? Monster Hunter? An action RPG? RTS micro?</p>
+          <textarea id="combatReference" name="combatReference"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="fullStats">What's the complete stat list?</label>
-          <p class="hint">You mentioned STR, INT, AGI, END. Are there others? What does each affect exactly?</p>
-          <textarea id="fullStats" name="fullStats"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="birthmarks">How do birthmarks work mechanically?</label>
-          <p class="hint">+10% to one stat? Unlock specific abilities? Change growth curves? Visible on the monster sprite?</p>
-          <textarea id="birthmarks" name="birthmarks"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="statCaps">Are there stat caps or diminishing returns?</label>
-          <p class="hint">Can STR grow forever? Species caps? Generation affects caps? Soft caps with slower growth?</p>
-          <textarea id="statCaps" name="statCaps"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="levelSystem">Is there a level system alongside stats?</label>
-          <p class="hint">Traditional XP levels? Just raw stats? Age-based milestones? Evolution thresholds?</p>
-          <textarea id="levelSystem" name="levelSystem"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="generationStats">How do generations affect stats?</label>
-          <p class="hint">Higher gen = higher base stats? Better caps? Access to better moves? Or just different, not stronger?</p>
-          <textarea id="generationStats" name="generationStats"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="statDisplay">How does the player see monster stats?</label>
-          <p class="hint">Detailed number screens? Simple bars? Hidden until discovered? Comparison tools?</p>
-          <textarea id="statDisplay" name="statDisplay"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="statsOther">Other thoughts on stats and growth?</label>
-          <textarea id="statsOther" name="statsOther"></textarea>
+          <label for="playerRole">During a fight, is the player a coach, a commander, or a participant?</label>
+          <p class="hint">Shouting from the sidelines? Giving tactical orders? In the thick of it using items?</p>
+          <textarea id="playerRole" name="playerRole"></textarea>
         </div>
       </section>
 
-      <!-- TEMPERAMENT & TRAINING -->
       <section>
-        <h2>Temperament & Training</h2>
+        <h2>Monster Relationship</h2>
 
-        <div class="context">
-          <strong>What you said:</strong>
-          Treating your monsters right increases temperament. Lower temperament = less obedience due to lack of training.
+        <div class="form-group">
+          <label for="monsterBond">Are monsters partners or tools?</label>
+          <p class="hint">Emotional bonds that matter? Or more like units in a strategy game?</p>
+          <textarea id="monsterBond" name="monsterBond"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="treatmentMechanics">What does "treating monsters right" mean mechanically?</label>
-          <p class="hint">Feeding them? Winning battles? Resting after fights? Petting/praise actions? Avoiding overwork?</p>
-          <textarea id="treatmentMechanics" name="treatmentMechanics"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="temperamentLoss">Can temperament decrease? How?</label>
-          <p class="hint">Losing battles? Being KO'd? Overworking? Neglect over time? Using them as fusion material (wait...)?</p>
-          <textarea id="temperamentLoss" name="temperamentLoss"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="temperamentScale">What's the temperament scale?</label>
-          <p class="hint">0-100? Tiers like Wild/Trained/Loyal/Bonded? Visible meter or hidden stat?</p>
-          <textarea id="temperamentScale" name="temperamentScale"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="wildTemperament">What's the temperament of a wild-caught monster?</label>
-          <p class="hint">Starts at zero? Varies by species/individual? Long training process to become useful?</p>
-          <textarea id="wildTemperament" name="wildTemperament"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="temperamentOther">Other thoughts on temperament/training?</label>
-          <textarea id="temperamentOther" name="temperamentOther"></textarea>
+          <label for="monsterTurnover">How often should players retire/replace monsters?</label>
+          <p class="hint">Keep the same team forever? Constant breeding for better ones? Mix?</p>
+          <textarea id="monsterTurnover" name="monsterTurnover"></textarea>
         </div>
       </section>
 
-      <!-- MOVES & ABILITIES -->
       <section>
-        <h2>Moves & Abilities</h2>
+        <h2>Progression</h2>
 
-        <div class="context">
-          <strong>What you said:</strong>
-          8 equippable attacks per monster. Parents can pass moves to offspring if the child can learn them.
+        <div class="form-group">
+          <label for="powerSource">Where does power come from?</label>
+          <p class="hint">Time invested? Smart breeding choices? Player skill? Finding rare monsters?</p>
+          <textarea id="powerSource" name="powerSource"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="moveAcquisition">How do monsters learn new moves?</label>
-          <p class="hint">Level up? Stat thresholds? Training items? Inherited only? Discovered in battle?</p>
-          <textarea id="moveAcquisition" name="moveAcquisition"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="movePool">How many total moves can a monster know vs equip?</label>
-          <p class="hint">Learn 20, equip 8? Or only ever know 8? Can you swap loadouts between battles?</p>
-          <textarea id="movePool" name="movePool"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="moveTypes">What types of moves exist?</label>
-          <p class="hint">Physical attacks? Ranged? Buffs/debuffs? Healing? Status effects (poison, stun)? Area attacks?</p>
-          <textarea id="moveTypes" name="moveTypes"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="speciesLocking">Are moves species-locked or universal?</label>
-          <p class="hint">Can any monster learn Fire Breath? Or only Reptilians? Starter-specific signature moves?</p>
-          <textarea id="speciesLocking" name="speciesLocking"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="moveSynergy">Can moves synergize between your two monsters?</label>
-          <p class="hint">Combo setups? One debuffs, other exploits? Formation bonuses? Or purely individual?</p>
-          <textarea id="moveSynergy" name="moveSynergy"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="movesOther">Other thoughts on moves/abilities?</label>
-          <textarea id="movesOther" name="movesOther"></textarea>
+          <label for="progressionFeel">Should progression feel like a grind, a puzzle, or a journey?</label>
+          <p class="hint">Steady effort rewarded? Figuring out optimal strategies? Story-driven milestones?</p>
+          <textarea id="progressionFeel" name="progressionFeel"></textarea>
         </div>
       </section>
 
-      <!-- BREEDING DEEP DIVE -->
       <section>
-        <h2>Breeding - The Numbers</h2>
+        <h2>Priorities</h2>
 
-        <div class="context">
-          <strong>What you said:</strong>
-          Fusion or breeding with long cooldown. Stats depend on parents via formula. Age determines eligibility. Same-gen only (except secret 4th gen cross-species).
+        <div class="form-group">
+          <label for="mvpFeatures">If you could only ship 3 features, what are they?</label>
+          <p class="hint">Combat? Breeding? Arena? Exploration? Base building?</p>
+          <textarea id="mvpFeatures" name="mvpFeatures"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="breedingCooldown">How long is the breeding cooldown?</label>
-          <p class="hint">Real-time hours? In-game days? Number of battles? One-time per monster?</p>
-          <textarea id="breedingCooldown" name="breedingCooldown"></textarea>
+          <label for="cutFirst">What gets cut first if scope becomes a problem?</label>
+          <p class="hint">Which systems are "nice to have" vs essential?</p>
+          <textarea id="cutFirst" name="cutFirst"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="fusionVsBreeding">What's the difference between fusion and breeding?</label>
-          <p class="hint">Fusion consumes parents? Breeding keeps them? Different stat outcomes? Player choice or species-dependent?</p>
-          <textarea id="fusionVsBreeding" name="fusionVsBreeding"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="statFormula">Conceptually, how does the stat inheritance formula work?</label>
-          <p class="hint">Average of parents? Best of both? Random range? Bonus for high-stat parents? Diminishing returns?</p>
-          <textarea id="statFormula" name="statFormula"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="offspringPreview">Can you preview potential offspring before committing?</label>
-          <p class="hint">See stat ranges? Possible birthmarks? Or is it always a gamble?</p>
-          <textarea id="offspringPreview" name="offspringPreview"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="ageRequirement">How long until a monster can breed?</label>
-          <p class="hint">X battles fought? Time alive? Stat thresholds reached? Story milestone?</p>
-          <textarea id="ageRequirement" name="ageRequirement"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="breedingOther">Other thoughts on breeding mechanics?</label>
-          <textarea id="breedingOther" name="breedingOther"></textarea>
-        </div>
-      </section>
-
-      <!-- CAPTURE SYSTEM -->
-      <section>
-        <h2>Wild Monster Capture</h2>
-
-        <div class="context">
-          <strong>What you said:</strong>
-          Weaken → tranquilize → carry back to base. One at a time. Die on the way = lose it. Rarer monsters harder to return with.
-        </div>
-
-        <div class="form-group">
-          <label for="tranquilizer">How does the tranquilizer work?</label>
-          <p class="hint">Consumable item with limited uses? Always available? Timing-based minigame? Chance to fail?</p>
-          <textarea id="tranquilizer" name="tranquilizer"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="carryMechanics">What's the carry journey like?</label>
-          <p class="hint">Can you still fight while carrying? Slower movement? Monster wakes up after time? Ambush events?</p>
-          <textarea id="carryMechanics" name="carryMechanics"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="baseDistance">How far is the base from hunting grounds?</label>
-          <p class="hint">Always nearby? Gets farther in later areas? Portable camps? Teleport items?</p>
-          <textarea id="baseDistance" name="baseDistance"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="captureVsBred">Can wild-caught monsters compete with bred ones?</label>
-          <p class="hint">Good enough for early game only? Can find rare high-stat wilds? Or breeding always superior?</p>
-          <textarea id="captureVsBred" name="captureVsBred"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="tamingProcess">What happens after getting them to base?</label>
-          <p class="hint">Instant party member? Taming period? Training to raise temperament? Chance they escape?</p>
-          <textarea id="tamingProcess" name="tamingProcess"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="captureOther">Other thoughts on capture/taming?</label>
-          <textarea id="captureOther" name="captureOther"></textarea>
-        </div>
-      </section>
-
-      <!-- BASE BUILDING -->
-      <section>
-        <h2>Base Building (If Included)</h2>
-
-        <div class="context">
-          <strong>What you said:</strong>
-          Maybe buildable/expandable base. Increases monster comfort/happiness. Enhances growth. NPCs can move in for shops.
-        </div>
-
-        <div class="form-group">
-          <label for="baseStructures">What can you build at the base?</label>
-          <p class="hint">Monster housing? Training facilities? Breeding grounds? Storage? Gardens for ingredients?</p>
-          <textarea id="baseStructures" name="baseStructures"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="happinessSystem">How does monster happiness/comfort work?</label>
-          <p class="hint">Affects stat growth? Temperament gains? Idle bonuses while you explore? Visual changes?</p>
-          <textarea id="happinessSystem" name="happinessSystem"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="buildingResources">What resources are needed for building?</label>
-          <p class="hint">Money only? Gathered materials? Monster drops? Quest rewards?</p>
-          <textarea id="buildingResources" name="buildingResources"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="npcTypes">What NPCs can move in?</label>
-          <p class="hint">Item shop? Move tutor? Breeder assistant? Arena scout? How do you recruit them?</p>
-          <textarea id="npcTypes" name="npcTypes"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="baseOther">Other thoughts on base building?</label>
-          <textarea id="baseOther" name="baseOther"></textarea>
-        </div>
-      </section>
-
-      <!-- ARENA DETAILS -->
-      <section>
-        <h2>Arena - Competition Details</h2>
-
-        <div class="context">
-          <strong>What you said:</strong>
-          D-S ranks per arena. Tournament brackets + ladder. Rank B unlocks next area. No weight classes—bring your godlike 4th gen to D rank if you want.
-        </div>
-
-        <div class="form-group">
-          <label for="bracketFormat">How do tournament brackets work?</label>
-          <p class="hint">Single elimination? Best of 3? How many opponents per bracket? Entry fee?</p>
-          <textarea id="bracketFormat" name="bracketFormat"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="ladderMechanics">How does the ranked ladder work?</label>
-          <p class="hint">Challenge anyone above you? Defend your position? Decay over time? ELO-style rating?</p>
-          <textarea id="ladderMechanics" name="ladderMechanics"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="rankProgression">How hard is it to climb from D to S rank?</label>
-          <p class="hint">Hours of grinding? Smart breeding required? Possible with 1st gen starters? Story pacing?</p>
-          <textarea id="rankProgression" name="rankProgression"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="arenaNPCs">Who are the notable NPCs on the ladder?</label>
-          <p class="hint">Named champions at each rank? Recurring rivals? Champions with signature monsters?</p>
-          <textarea id="arenaNPCs" name="arenaNPCs"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="arenaRewards">What specific rewards come from arena victories?</label>
-          <p class="hint">Money amounts? Unique items? Rare ingredients? Breeding unlocks? Title/cosmetics?</p>
-          <textarea id="arenaRewards" name="arenaRewards"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="arenaOther">Other thoughts on arena competition?</label>
-          <textarea id="arenaOther" name="arenaOther"></textarea>
-        </div>
-      </section>
-
-      <!-- MULTIPLAYER -->
-      <section>
-        <h2>Multiplayer (If Included)</h2>
-
-        <div class="context">
-          <strong>What you said:</strong>
-          Perhaps multiplayer to fight friends or strangers after becoming champion.
-        </div>
-
-        <div class="form-group">
-          <label for="multiplayerType">PvP only, or co-op too?</label>
-          <p class="hint">Battle each other's monsters? Explore together? Trade monsters? Raid bosses together?</p>
-          <textarea id="multiplayerType" name="multiplayerType"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="matchmaking">How would matchmaking work?</label>
-          <p class="hint">Based on ladder rank? Monster stats/generation? Casual vs ranked modes? Friend codes?</p>
-          <textarea id="matchmaking" name="matchmaking"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="trading">Can players trade monsters?</label>
-          <p class="hint">Direct trades? Auction house? Breeding services? Or self-contained single-player economies?</p>
-          <textarea id="trading" name="trading"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="multiplayerPriority">How important is multiplayer to the vision?</label>
-          <p class="hint">Core feature? Nice-to-have post-launch? Could be cut entirely? Local-only acceptable?</p>
-          <textarea id="multiplayerPriority" name="multiplayerPriority"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="multiplayerOther">Other thoughts on multiplayer?</label>
-          <textarea id="multiplayerOther" name="multiplayerOther"></textarea>
-        </div>
-      </section>
-
-      <!-- UI/UX -->
-      <section>
-        <h2>Controls & Interface</h2>
-
-        <div class="context">
-          <strong>What you said:</strong>
-          L1/R1 select monster. D-pad for stances. Face buttons for attacks. L2/R2 for items. L1+L2 or R1+R2 for special options.
-        </div>
-
-        <div class="form-group">
-          <label for="controlFeel">What should the control feel be?</label>
-          <p class="hint">Hectic and demanding? Comfortable and readable? Panic-inducing at high level? Accessible to newcomers?</p>
-          <textarea id="controlFeel" name="controlFeel"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="battleHUD">What info is shown during battle?</label>
-          <p class="hint">HP bars? Energy meters? Stance indicators? Enemy health visible? Cooldown timers?</p>
-          <textarea id="battleHUD" name="battleHUD"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="pauseMenu">Can you pause during real-time battles?</label>
-          <p class="hint">No pausing ever? Pause to use items? Pause to change tactics? Slow-mo mode?</p>
-          <textarea id="pauseMenu" name="pauseMenu"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="menuSystems">What menus exist outside battle?</label>
-          <p class="hint">Monster management? Move loadouts? Inventory? Breeding interface? Base building menu?</p>
-          <textarea id="menuSystems" name="menuSystems"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="uiOther">Other thoughts on controls/UI?</label>
-          <textarea id="uiOther" name="uiOther"></textarea>
-        </div>
-      </section>
-
-      <!-- EDGE CASES -->
-      <section>
-        <h2>Edge Cases & Feel</h2>
-
-        <div class="form-group">
-          <label for="monsterDeath">If monsters can die permanently, how do you prevent frustration?</label>
-          <p class="hint">Warnings before fatal fights? Retreat options? Death only in specific modes? Insurance items?</p>
-          <textarea id="monsterDeath" name="monsterDeath"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="lossRecovery">What happens when you lose badly?</label>
-          <p class="hint">Respawn at base? Lose money/items? Monsters need recovery time? Difficulty options?</p>
-          <textarea id="lossRecovery" name="lossRecovery"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="grindinessLevel">How grindy should progression feel?</label>
-          <p class="hint">Steady progress with normal play? Hardcore breeding optimization? Casual-friendly with optional depth?</p>
-          <textarea id="grindinessLevel" name="grindinessLevel"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="newPlayerExperience">How does a brand new player learn the systems?</label>
-          <p class="hint">Tutorial area? Learning by doing? Mentor NPC? Gradual unlocks? Thrown into the deep end?</p>
-          <textarea id="newPlayerExperience" name="newPlayerExperience"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="endgameLoop">What keeps players engaged after becoming champion?</label>
-          <p class="hint">Breeding perfect monsters? Completing the monster dex? PvP ladder? Harder challenge modes? Secret bosses?</p>
-          <textarea id="endgameLoop" name="endgameLoop"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="finalThoughts">Any other details you want to nail down?</label>
-          <textarea id="finalThoughts" name="finalThoughts"></textarea>
+          <label for="otherThoughts">Anything else on your mind about the framework?</label>
+          <textarea id="otherThoughts" name="otherThoughts"></textarea>
         </div>
       </section>
 
@@ -719,7 +283,7 @@
   <script>
     function exportAnswers() {
       const form = document.getElementById('designForm');
-      let output = "MONSTER BATTLER - DEEP DIVE ANSWERS\n";
+      let output = "MONSTER BATTLER - FRAMEWORK ANSWERS\n";
       output += "====================================\n\n";
 
       const sections = form.querySelectorAll('section');
@@ -741,11 +305,11 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'monster_battler_deep_dive.txt';
+      a.download = 'monster_battler_framework.txt';
       a.click();
       URL.revokeObjectURL(url);
 
-      alert('Answers exported to monster_battler_deep_dive.txt');
+      alert('Answers exported to monster_battler_framework.txt');
     }
 
     function clearForm() {
