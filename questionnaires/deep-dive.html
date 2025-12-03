@@ -363,13 +363,17 @@
 
             <div class="question-group">
                 <label class="question-label">What status effects exist?</label>
-                <div class="option-grid">
+                <div class="option-grid" id="statusGrid">
                     <div class="option-item"><input type="checkbox" id="status-poison"><label for="status-poison">Poison/DoT</label></div>
                     <div class="option-item"><input type="checkbox" id="status-stun"><label for="status-stun">Stun/Freeze</label></div>
                     <div class="option-item"><input type="checkbox" id="status-slow"><label for="status-slow">Slow</label></div>
                     <div class="option-item"><input type="checkbox" id="status-blind"><label for="status-blind">Blind/Accuracy</label></div>
                     <div class="option-item"><input type="checkbox" id="status-burn"><label for="status-burn">Burn</label></div>
                     <div class="option-item"><input type="checkbox" id="status-confuse"><label for="status-confuse">Confusion</label></div>
+                </div>
+                <div class="add-custom" style="margin-top: 12px; display: flex; gap: 8px;">
+                    <input type="text" id="customStatusInput" placeholder="Add custom status effect..." style="flex: 1;">
+                    <button type="button" class="btn btn-secondary" onclick="addCustomItem('status')" style="padding: 8px 16px;">+ Add</button>
                 </div>
             </div>
 
@@ -765,7 +769,7 @@
 
             out += '## COMBAT MECHANICS\n\n';
             out += 'Damage types: ' + (getVal('q3-1') || '-') + '\n';
-            out += 'Status effects: ' + getChecked(['status-poison','status-stun','status-slow','status-blind','status-burn','status-confuse']) + '\n';
+            out += 'Status effects: ' + getGridOutput('status', ['status-poison','status-stun','status-slow','status-blind','status-burn','status-confuse']) + '\n';
             out += 'Stagger/knockback: ' + (getVal('q3-2') || '-') + '\n';
             out += 'Targeting: ' + (getVal('q3-3') || '-') + '\n';
             out += 'Battle end: ' + (getVal('q3-4') || '-') + '\n';
@@ -857,18 +861,18 @@
             saveToStorage();
         }
 
-        const customCounts = { ui: 0, buy: 0 };
+        const customCounts = { ui: 0, buy: 0, status: 0 };
 
         function addCustomItem(type) {
-            const inputId = type === 'ui' ? 'customUiInput' : 'customBuyInput';
-            const gridId = type === 'ui' ? 'uiGrid' : 'buyGrid';
-            const input = document.getElementById(inputId);
+            const inputMap = { ui: 'customUiInput', buy: 'customBuyInput', status: 'customStatusInput' };
+            const gridMap = { ui: 'uiGrid', buy: 'buyGrid', status: 'statusGrid' };
+            const input = document.getElementById(inputMap[type]);
             const name = input.value.trim();
             if (!name) return;
 
             customCounts[type]++;
             const id = `${type}-custom-${customCounts[type]}`;
-            const grid = document.getElementById(gridId);
+            const grid = document.getElementById(gridMap[type]);
 
             const div = document.createElement('div');
             div.className = `option-item custom-${type}`;
@@ -935,10 +939,11 @@
             if (confirm('Clear all answers?')) {
                 document.querySelectorAll('textarea, input[type="text"]').forEach(el => el.value = '');
                 document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(el => el.checked = false);
-                document.querySelectorAll('.custom-category, .custom-ui, .custom-buy').forEach(el => el.remove());
+                document.querySelectorAll('.custom-category, .custom-ui, .custom-buy, .custom-status').forEach(el => el.remove());
                 customCategoryCount = 0;
                 customCounts.ui = 0;
                 customCounts.buy = 0;
+                customCounts.status = 0;
                 localStorage.removeItem('deepDiveData');
                 goToSection(1);
                 document.getElementById('exportSection').style.display = 'none';
@@ -981,6 +986,14 @@
                 if (cb && label) customBuy.push({ name: label.textContent, checked: cb.checked });
             });
             data.customBuy = customBuy;
+            // Save custom status effects
+            const customStatus = [];
+            document.querySelectorAll('.custom-status').forEach(div => {
+                const cb = div.querySelector('input');
+                const label = div.querySelector('label');
+                if (cb && label) customStatus.push({ name: label.textContent, checked: cb.checked });
+            });
+            data.customStatus = customStatus;
             localStorage.setItem('deepDiveData', JSON.stringify(data));
         }
 
@@ -1039,8 +1052,25 @@
                         grid.appendChild(div);
                     });
                 }
+                // Load custom status effects
+                if (data.customStatus) {
+                    data.customStatus.forEach(item => {
+                        customCounts.status++;
+                        const id = 'status-custom-' + customCounts.status;
+                        const grid = document.getElementById('statusGrid');
+                        const div = document.createElement('div');
+                        div.className = 'option-item custom-status';
+                        div.innerHTML = `
+                            <input type="checkbox" id="${id}" ${item.checked ? 'checked' : ''}>
+                            <label for="${id}">${item.name}</label>
+                            <span class="remove-cat" onclick="removeCategory(this)" style="position:absolute;top:2px;right:6px;cursor:pointer;color:var(--accent-red);font-size:0.8rem;">&times;</span>
+                        `;
+                        div.style.position = 'relative';
+                        grid.appendChild(div);
+                    });
+                }
                 Object.keys(data).forEach(key => {
-                    if (['customCategories', 'customUi', 'customBuy'].includes(key)) return;
+                    if (['customCategories', 'customUi', 'customBuy', 'customStatus'].includes(key)) return;
                     const el = document.getElementById(key);
                     if (el) {
                         if (el.type === 'checkbox' || el.type === 'radio') el.checked = data[key];
@@ -1060,6 +1090,9 @@
         });
         document.getElementById('customBuyInput').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') { e.preventDefault(); addCustomItem('buy'); }
+        });
+        document.getElementById('customStatusInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); addCustomItem('status'); }
         });
         init();
     </script>
