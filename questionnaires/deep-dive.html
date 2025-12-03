@@ -550,13 +550,17 @@
 
             <div class="question-group">
                 <label class="question-label">What info is shown during battle?</label>
-                <div class="option-grid">
+                <div class="option-grid" id="uiGrid">
                     <div class="option-item"><input type="checkbox" id="ui-hp"><label for="ui-hp">HP Bars</label></div>
                     <div class="option-item"><input type="checkbox" id="ui-energy"><label for="ui-energy">Energy/MP</label></div>
                     <div class="option-item"><input type="checkbox" id="ui-status"><label for="ui-status">Status Icons</label></div>
                     <div class="option-item"><input type="checkbox" id="ui-commands"><label for="ui-commands">Command Menu</label></div>
                     <div class="option-item"><input type="checkbox" id="ui-cooldowns"><label for="ui-cooldowns">Move Cooldowns</label></div>
                     <div class="option-item"><input type="checkbox" id="ui-minimap"><label for="ui-minimap">Battle Minimap</label></div>
+                </div>
+                <div class="add-custom" style="margin-top: 12px; display: flex; gap: 8px;">
+                    <input type="text" id="customUiInput" placeholder="Add custom UI element..." style="flex: 1;">
+                    <button type="button" class="btn btn-secondary" onclick="addCustomItem('ui')" style="padding: 8px 16px;">+ Add</button>
                 </div>
             </div>
 
@@ -605,13 +609,17 @@
 
             <div class="question-group">
                 <label class="question-label">What can you buy with money?</label>
-                <div class="option-grid">
+                <div class="option-grid" id="buyGrid">
                     <div class="option-item"><input type="checkbox" id="buy-items"><label for="buy-items">Battle Items</label></div>
                     <div class="option-item"><input type="checkbox" id="buy-food"><label for="buy-food">Food/Growth</label></div>
                     <div class="option-item"><input type="checkbox" id="buy-base"><label for="buy-base">Base Upgrades</label></div>
                     <div class="option-item"><input type="checkbox" id="buy-cosmetic"><label for="buy-cosmetic">Cosmetics</label></div>
                     <div class="option-item"><input type="checkbox" id="buy-moves"><label for="buy-moves">Move TMs</label></div>
                     <div class="option-item"><input type="checkbox" id="buy-capture"><label for="buy-capture">Capture Tools</label></div>
+                </div>
+                <div class="add-custom" style="margin-top: 12px; display: flex; gap: 8px;">
+                    <input type="text" id="customBuyInput" placeholder="Add custom purchasable..." style="flex: 1;">
+                    <button type="button" class="btn btn-secondary" onclick="addCustomItem('buy')" style="padding: 8px 16px;">+ Add</button>
                 </div>
             </div>
 
@@ -786,7 +794,7 @@
             out += 'Legendaries: ' + (getVal('q6-5') || '-') + '\n\n';
 
             out += '## UI & GAME FEEL\n\n';
-            out += 'Battle UI: ' + getChecked(['ui-hp','ui-energy','ui-status','ui-commands','ui-cooldowns','ui-minimap']) + '\n';
+            out += 'Battle UI: ' + getGridOutput('ui', ['ui-hp','ui-energy','ui-status','ui-commands','ui-cooldowns','ui-minimap']) + '\n';
             out += 'Camera: ' + (getVal('q7-1') || '-') + '\n';
             out += 'Command navigation: ' + (getVal('q7-2') || '-') + '\n';
             out += 'Command feedback: ' + (getVal('q7-3') || '-') + '\n';
@@ -794,7 +802,7 @@
 
             out += '## ECONOMY & REWARDS\n\n';
             out += 'Currency name: ' + (getVal('q8-1') || '-') + '\n';
-            out += 'Purchasables: ' + getChecked(['buy-items','buy-food','buy-base','buy-cosmetic','buy-moves','buy-capture']) + '\n';
+            out += 'Purchasables: ' + getGridOutput('buy', ['buy-items','buy-food','buy-base','buy-cosmetic','buy-moves','buy-capture']) + '\n';
             out += 'Arena payouts: ' + (getVal('q8-2') || '-') + '\n';
             out += 'Wild drops: ' + (getVal('q8-3') || '-') + '\n';
             out += 'Anti-grind: ' + (getVal('q8-4') || '-') + '\n\n';
@@ -849,9 +857,44 @@
             saveToStorage();
         }
 
+        const customCounts = { ui: 0, buy: 0 };
+
+        function addCustomItem(type) {
+            const inputId = type === 'ui' ? 'customUiInput' : 'customBuyInput';
+            const gridId = type === 'ui' ? 'uiGrid' : 'buyGrid';
+            const input = document.getElementById(inputId);
+            const name = input.value.trim();
+            if (!name) return;
+
+            customCounts[type]++;
+            const id = `${type}-custom-${customCounts[type]}`;
+            const grid = document.getElementById(gridId);
+
+            const div = document.createElement('div');
+            div.className = `option-item custom-${type}`;
+            div.innerHTML = `
+                <input type="checkbox" id="${id}" checked>
+                <label for="${id}">${name}</label>
+                <span class="remove-cat" onclick="removeCategory(this)" style="position:absolute;top:2px;right:6px;cursor:pointer;color:var(--accent-red);font-size:0.8rem;">&times;</span>
+            `;
+            div.style.position = 'relative';
+            grid.appendChild(div);
+
+            input.value = '';
+            saveToStorage();
+        }
+
         function getCustomCategories() {
             const customs = [];
             document.querySelectorAll('.custom-category input:checked').forEach(cb => {
+                customs.push(cb.nextElementSibling.textContent);
+            });
+            return customs;
+        }
+
+        function getCustomItems(type) {
+            const customs = [];
+            document.querySelectorAll(`.custom-${type} input:checked`).forEach(cb => {
                 customs.push(cb.nextElementSibling.textContent);
             });
             return customs;
@@ -862,6 +905,15 @@
                 .filter(id => document.getElementById(id)?.checked)
                 .map(id => document.getElementById(id).nextElementSibling.textContent);
             const custom = getCustomCategories();
+            const all = [...preset, ...custom];
+            return all.length ? all.join(', ') : 'None selected';
+        }
+
+        function getGridOutput(type, presetIds) {
+            const preset = presetIds
+                .filter(id => document.getElementById(id)?.checked)
+                .map(id => document.getElementById(id).nextElementSibling.textContent);
+            const custom = getCustomItems(type);
             const all = [...preset, ...custom];
             return all.length ? all.join(', ') : 'None selected';
         }
@@ -883,8 +935,10 @@
             if (confirm('Clear all answers?')) {
                 document.querySelectorAll('textarea, input[type="text"]').forEach(el => el.value = '');
                 document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(el => el.checked = false);
-                document.querySelectorAll('.custom-category').forEach(el => el.remove());
+                document.querySelectorAll('.custom-category, .custom-ui, .custom-buy').forEach(el => el.remove());
                 customCategoryCount = 0;
+                customCounts.ui = 0;
+                customCounts.buy = 0;
                 localStorage.removeItem('deepDiveData');
                 goToSection(1);
                 document.getElementById('exportSection').style.display = 'none';
@@ -911,6 +965,22 @@
                 if (cb && label) customCats.push({ name: label.textContent, checked: cb.checked });
             });
             data.customCategories = customCats;
+            // Save custom UI items
+            const customUi = [];
+            document.querySelectorAll('.custom-ui').forEach(div => {
+                const cb = div.querySelector('input');
+                const label = div.querySelector('label');
+                if (cb && label) customUi.push({ name: label.textContent, checked: cb.checked });
+            });
+            data.customUi = customUi;
+            // Save custom buy items
+            const customBuy = [];
+            document.querySelectorAll('.custom-buy').forEach(div => {
+                const cb = div.querySelector('input');
+                const label = div.querySelector('label');
+                if (cb && label) customBuy.push({ name: label.textContent, checked: cb.checked });
+            });
+            data.customBuy = customBuy;
             localStorage.setItem('deepDiveData', JSON.stringify(data));
         }
 
@@ -935,8 +1005,42 @@
                         grid.appendChild(div);
                     });
                 }
+                // Load custom UI items
+                if (data.customUi) {
+                    data.customUi.forEach(item => {
+                        customCounts.ui++;
+                        const id = 'ui-custom-' + customCounts.ui;
+                        const grid = document.getElementById('uiGrid');
+                        const div = document.createElement('div');
+                        div.className = 'option-item custom-ui';
+                        div.innerHTML = `
+                            <input type="checkbox" id="${id}" ${item.checked ? 'checked' : ''}>
+                            <label for="${id}">${item.name}</label>
+                            <span class="remove-cat" onclick="removeCategory(this)" style="position:absolute;top:2px;right:6px;cursor:pointer;color:var(--accent-red);font-size:0.8rem;">&times;</span>
+                        `;
+                        div.style.position = 'relative';
+                        grid.appendChild(div);
+                    });
+                }
+                // Load custom buy items
+                if (data.customBuy) {
+                    data.customBuy.forEach(item => {
+                        customCounts.buy++;
+                        const id = 'buy-custom-' + customCounts.buy;
+                        const grid = document.getElementById('buyGrid');
+                        const div = document.createElement('div');
+                        div.className = 'option-item custom-buy';
+                        div.innerHTML = `
+                            <input type="checkbox" id="${id}" ${item.checked ? 'checked' : ''}>
+                            <label for="${id}">${item.name}</label>
+                            <span class="remove-cat" onclick="removeCategory(this)" style="position:absolute;top:2px;right:6px;cursor:pointer;color:var(--accent-red);font-size:0.8rem;">&times;</span>
+                        `;
+                        div.style.position = 'relative';
+                        grid.appendChild(div);
+                    });
+                }
                 Object.keys(data).forEach(key => {
-                    if (key === 'customCategories') return;
+                    if (['customCategories', 'customUi', 'customBuy'].includes(key)) return;
                     const el = document.getElementById(key);
                     if (el) {
                         if (el.type === 'checkbox' || el.type === 'radio') el.checked = data[key];
@@ -950,6 +1054,12 @@
         document.addEventListener('input', saveToStorage);
         document.getElementById('customCategoryInput').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') { e.preventDefault(); addCustomCategory(); }
+        });
+        document.getElementById('customUiInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); addCustomItem('ui'); }
+        });
+        document.getElementById('customBuyInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); addCustomItem('buy'); }
         });
         init();
     </script>
